@@ -1,0 +1,15 @@
+Double_Data type that holds a bigger and more precise numbers.
+Inheritance_Object Orientated Programming practice, where a subclass can inherit behaviour from a class.
+Integer_Data type that holds a whole number, can be positive, negative or zero.
+String_Data type which holds a series or sequence of characters.
+For Loop_A loop that takes a index and stops after a certain length has been reached.
+Abstraction_Object Orientated Programming practice, where the programmer hides unneccesary information from users.
+Array_Data structure which holds a series of objects of the same type.
+Interface_Object Orientated Programming practice, can implement multiple of these but must use all the methods from one.
+Boolean_A data type which holds only two values: truth or false.
+While Loop_A loop which carries on as long as a condition hasn't been met.
+Polymorphism_Object Orientated Programing practice, different objects can redefine the same methods for different purposes.
+Dictionary_Data structure for objects, unlike lists has to hold both a key and value.
+Char_Data type which represents a single character.
+List_Data structure which holds objects, but unlike arrays can shrink and expand.
+Do While Loop_A loop which goes through at least once and takes a condition for its runtime.
