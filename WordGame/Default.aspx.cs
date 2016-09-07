@@ -23,7 +23,6 @@ using System.Web.UI;
 public partial class _Default : System.Web.UI.Page
 {
     // Here we define all the variables that would be used in the program.
-
     private static string[] readFile;
     private static bool correctWord;
  
@@ -62,15 +61,16 @@ public partial class _Default : System.Web.UI.Page
         {
             // The readFile variable reads our file from the resources directory.
             // Note that we don't need to specify the whole file path.
-            readFile = File.ReadAllLines(System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, @"Resources\wordsP.txt"));
+            readFile = File.ReadAllLines(System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, @"Resources\wordsN.txt"));
 
             // Here we split a the above readFile (which is a string array) by the character _ to seperate the word and hint.
             // We then use a lambda expression to split each respective part as a key and value in the dictionary.
             splitFile = readFile.Select(l => l.Split('_')).ToDictionary(a => a[0], a => a[1]);
 
-            // Sets the Score label to 0, only called here once because it changes throughout the game.
+            // Sets the default and word chain to 0 (thats what they intialize as)
+            // Only called here once because it changes throughout the game.
             // Then calls the setup method, which sets up a new hidden word and starts the timer for the game.
-            scoreLbl.Text = "SCORE: 0";
+            scoreLbl.Text = "SCORE: " + currentScore;
             chainLbl.Text = "Current Word Chain: " + chainMulti;
             setup();
         }   
@@ -84,10 +84,12 @@ public partial class _Default : System.Web.UI.Page
         lettersLbl.Text = "";
         wordLbl.Text = "";
 
-        if (seconds == 0) { startTimer(121); seconds = (int)Session["timer"]; }
-
+        // We set these two buttons to false incase the game was restarted from the button click.
         newBtn.Visible = false;
-        exitBtn.Visible = false; 
+        exitBtn.Visible = false;
+
+        // Checks whether second is equal to 0, if so restart timer for new game.
+        if (seconds == 0) { startTimer(121); seconds = (int)Session["timer"]; }
 
         // We set the correctWord to false as it's a new word.
         correctWord = false;
@@ -156,8 +158,8 @@ public partial class _Default : System.Web.UI.Page
 
             // Hidden then recompiles as a new string the above hidden character array with the new letter.
             hidden = new string(hiddenChar);
+            // Since it was a correct guess, we add on two seconds to the current timer.
             increaseTime(2);
-
             // We call the updateScreen() method to update all the visuals on screen.
             updateScreen();
         }
@@ -168,6 +170,7 @@ public partial class _Default : System.Web.UI.Page
 
             // It also increments the wrong guess by a 1 on each incorrect guess.
             wrongGuess++;
+            // Here we decrease the timer by 5 seconds for each wrong guess.
             decreaseTime(5);
 
             // This mini if else statement block changes the multiplier depending on the number of incorrect guesses.
@@ -184,17 +187,16 @@ public partial class _Default : System.Web.UI.Page
         foreach (Button b in btnList) { if (b.Text.Equals(e.CommandArgument)) { b.Enabled = false; } }
 
         // Finally if the hidden word has all been revealed (made equal to word), this if block would run. 
-
         if (hidden == word) {
 
+            // We check if there was wrong guesses before getting the correct word, if no we increment chainMulti by 1.
             if (wrongGuess == 0) { chainMulti = chainMulti + 1; }
+            // If there was a wrong guess, we reset chainMulti to 0.
             else { chainMulti = 0; }
     
             score *= multiplier;
             // Here we set correctWord to true.
             correctWord = true;
-
-            //wordLbl.Text = "That was the correct word!";
 
             // Then updateScreen() method for visuals and finally the setup() method to start a new word.
             updateScreen();
@@ -211,6 +213,7 @@ public partial class _Default : System.Web.UI.Page
         // If the user guessed the correct word, we finally increment the score with this if statement.
         if (correctWord == true) {
             // Note that currentScore is made equal to score which is always a static 500
+            // The same reasoning goes for currentChain in order to keep the the last value in.
             // But the score label withs currentScore rather score as to increment on each correct word guess.
             currentChain += chainMulti;
             currentScore += score;
@@ -230,12 +233,16 @@ public partial class _Default : System.Web.UI.Page
 
     }
 
+    // The first of two mini methods, this takes a integer argument to decrease the timer of the game.
+    // The integer determines the amount of seconds to decrease by.
     public void decreaseTime(int decrease)
     {
         Session["timer"] = seconds;
         seconds = seconds - decrease;
     }
 
+    // The second of two mini methods, this takes a integer argument to increase the timer of the game.
+    // The integer determines the amount of seconds to increase by.
     public void increaseTime(int increase)
     {
         Session["timer"] = seconds;
@@ -263,6 +270,9 @@ public partial class _Default : System.Web.UI.Page
         // Else if seconds is not over (aka is 0) this block of instructions goes off.
         else {
 
+            // Using some if and else if statement blocks, we check what the current number of word chain is.
+            // Depending on the value, the currentScore would get addtional multiplier.
+            // Lowest multiplier being 0x and with 4.5x being the highest.
             if ((chainMulti >= 2 && chainMulti < 4)) {
                 currentScore *= 3;
                 scoreLbl.Text = "FINAL SCORE (x3): " + currentScore;
@@ -286,15 +296,17 @@ public partial class _Default : System.Web.UI.Page
                 chainLbl.Text = String.Format("Sadly .. 0x Chain Multiplier for: {0} Word Chain :(", chainMulti);
             }
 
+            // Finally we make the below buttons visible to let user either restart or exit the program.
             newBtn.Visible = true;
             exitBtn.Visible = true;
-
+           
             // We show on the word label the whole word which the user was currently attempting.
             wordLbl.Text = word;
 
             // Disable every button found in the game.
             foreach (Button b in btnList) { b.Enabled = false; }
 
+            // The label for timer is updated to 0 incase it is any other value.
             timeLbl.Text = "Time remaining: 0";
 
             // Finally we set the timer to not enabled (visible).
@@ -302,16 +314,25 @@ public partial class _Default : System.Web.UI.Page
         }
     }
 
+    // CLicking the exit button simply exits the current program / web page.
     protected void exitBtn_Click(object sender, EventArgs e)
     {
-
-
+       //ClientScript.RegisterStartupScript(typeof(Page), "closePage", "window.close();", true);
+       //ClientScript.RegisterStartupScript(typeof(Page),"closePage", "window.open('', '_self', ''); window.close();", true);
+       // ClientScript.RegisterStartupScript(typeof(Page), "closePage", "window.open('close.html', '_self', null);", true);
+       //ClientScript.RegisterStartupScript(typeof(Page), "closePage", "<script type='text/JavaScript'>window.close();</script>");
     }
 
+    // Clicking on the Restart button will reset the game to allow for replays.
     protected void newBtn_Click(object sender, EventArgs e)
     {
+        // We reset these two integers as they are not updated in the screen or setup.
         currentScore = 0;
         chainMulti = 0;
+        // Then update the labels to reflect that.
+        scoreLbl.Text = "SCORE: " + currentScore;
+        chainLbl.Text = "Current Word Chain: " + chainMulti;
+        // Finally we restart the game by recalling setup().
         setup();
     }
 }

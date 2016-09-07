@@ -66,28 +66,26 @@
         <asp:Button ID="nBtn" runat="server" Text="N" CommandArgument="N" OnCommand="letterGuessed" />
         <asp:Button ID="mBtn" runat="server" Text="M" CommandArgument="M" OnCommand="letterGuessed" />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;<asp:Label ID="multiLbl" runat="server"></asp:Label>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <br />
         <asp:Label ID="timeLbl" runat="server"></asp:Label>
+            <br />
+        <br />
+        <asp:Button ID="newBtn" runat="server" Text="Restart" OnClick="newBtn_Click" Visible="False" Width="59px" /> &nbsp;
+        <asp:Button ID="exitBtn" runat="server" Text="Exit" Width="62px" OnClick="exitBtn_Click" Visible="False" />
+        <br />
+        <br />
+
         </ContentTemplate>
         </asp:UpdatePanel>
         <asp:Timer ID="timer" runat="server" Interval="1000" OnTick="timer_Tick"> </asp:Timer>
     
         <br />
-        <asp:Button ID="newBtn" runat="server" Text="Restart" OnClick="newBtn_Click" Visible="False" />
-&nbsp;
-        <asp:Button ID="exitBtn" runat="server" Text="Exit" Width="62px" OnClick="exitBtn_Click" Visible="False" />
         <br />
-        <br />
-    
-
-        <br />
-        <br />
-
-
 
     </div>
     </form>
 </body>
 </html>
+
+
