@@ -11,7 +11,7 @@
         }
     </style>
 </head>
-<body style="height: 574px">
+<body style="height: 423px">
 
     <form id="form1" runat="server">
     <asp:ScriptManager id="scriptManager" runat="server" />
@@ -24,12 +24,16 @@
         <asp:Label ID="wordLbl" runat="server" Font-Size="X-Large"></asp:Label>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <br />
         <br />
-            <asp:Label ID="incorrectLbl" runat="server" Text="Incorrect Letters:"></asp:Label>
+            <asp:Label ID="incorrectLbl" runat="server" Text="Incorrect Letters:" Font-Italic="True"></asp:Label>
 &nbsp;<asp:Label ID="lettersLbl" runat="server"></asp:Label>
         <br />
+            <asp:Label ID="hintTextLbl" runat="server" Font-Bold="True" Text="HINT: "></asp:Label>
         <asp:Label ID="hintLbl" runat="server"></asp:Label>
             <br />
+            <br />
             <asp:Label ID="chainLbl" runat="server"></asp:Label>
+            <br />
+            <asp:Label ID="countLbl" runat="server"></asp:Label>
         <br />
         <br />
         <asp:Button ID="qBtn" runat="server" Text="Q" CommandArgument="Q" OnCommand="letterGuessed" />
@@ -66,13 +70,16 @@
         <asp:Button ID="nBtn" runat="server" Text="N" CommandArgument="N" OnCommand="letterGuessed" />
         <asp:Button ID="mBtn" runat="server" Text="M" CommandArgument="M" OnCommand="letterGuessed" />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;<asp:Label ID="multiLbl" runat="server"></asp:Label>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br /> <br /> 
+            <asp:Label ID="livesLbl" runat="server"></asp:Label>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <br />
         <br />
         <asp:Label ID="timeLbl" runat="server"></asp:Label>
             <br />
         <br />
-        <asp:Button ID="newBtn" runat="server" Text="Restart" OnClick="newBtn_Click" Visible="False" Width="59px" /> &nbsp;
-        <asp:Button ID="exitBtn" runat="server" Text="Exit" Width="62px" OnClick="exitBtn_Click" Visible="False" />
+        <asp:Button ID="exitBtn" runat="server" Text="Quit" Width="62px" OnClick="exitBtn_Click" />
+            &nbsp;&nbsp;<asp:Button ID="newBtn" runat="server" Text="Restart" OnClick="newBtn_Click" Visible="False" Width="59px" /> &nbsp;
         <br />
         <br />
 
