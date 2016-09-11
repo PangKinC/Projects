@@ -18,7 +18,7 @@ using System.Web.UI;
 // -- Let the hidden word ignore spaces so can use multiple words.
 // -- Create a hint for each of the hidden word possibly using the split() method.
 // -- Make random not repeat the same word twice.
-// Make the game detect keypresses from keyboard as a second input method.
+// -- Make the game detect keypresses from keyboard as a second input method. (Only from Frontend)
 // Use Bootstrap & CSS to make things more pretty.
 
 // Added Features:
@@ -45,29 +45,32 @@ public partial class _Default : System.Web.UI.Page
 
     private static char[] hiddenChar;
     private static char[] wordChar;
+    private static char letter;
     private static string word;
     private static string hidden;
-    private static string letter;
     private static string hint;
 
     private static int seconds { get; set; }
     private static Dictionary<string, string> splitFile = new Dictionary<string, string>();
-    private static List<Button> btnList;
+    private static List<Button> btnList;    
 
     // The set of instructions which is done as soon as the page is loaded.
     protected void Page_Load(object sender, EventArgs e)
     {
+ 
         // Here we add the all the different buttons on the form, representing each of the alphabet keys.
         btnList = new List<Button>() { qBtn, wBtn, eBtn, rBtn, tBtn, yBtn, uBtn, iBtn, oBtn, pBtn,
                                        aBtn, sBtn, dBtn, fBtn, gBtn, hBtn, jBtn, kBtn, lBtn,
                                        zBtn, xBtn, cBtn, vBtn, bBtn, nBtn, mBtn };
+
+        
 
         // This if statement goes through as long as the page is not in a postback state.
         if (!IsPostBack) 
         {
             // The readFile variable reads our file from the resources directory.
             // Note that we don't need to specify the whole file path.
-            readFile = File.ReadAllLines(System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, @"Resources\wordsP.txt"));
+            readFile = File.ReadAllLines(System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, @"Resources\wordsN.txt"));
             // Here we split a the above readFile (which is a string array) by the character _ to seperate the word and hint.
             // We then use a lambda expression to split each respective part as a key and value in the dictionary.
             splitFile = readFile.Select(l => l.Split('_')).ToDictionary(a => a[0], a => a[1]);
@@ -111,7 +114,7 @@ public partial class _Default : System.Web.UI.Page
         newBtn.Visible = false;
 
         // Here we set the timer to 36 seconds for EACH new word generated (AKA when player guesses word correctly)
-        startTimer(36);
+        startTimer(31);
         seconds = (int)Session["timer"];
 
         // We set the correctWord to false as it's a new word.
@@ -162,24 +165,26 @@ public partial class _Default : System.Web.UI.Page
 
     // The letterGuessed is called on every button click in which all buttons have this same method assigned to onCommand.
     // We also use the Command argument e instead of the usual sender as button for the value.
-    public void letterGuessed (object sender, CommandEventArgs e)
-    {    
-        // We take the command argument of the button then it into a string and finally a character array.
-        letter = e.CommandArgument.ToString();
-        letter.ToCharArray();
+    public void letterGuessed (object sender, EventArgs e)
+    {
+        // We take the sender argument and change identify it as a button
+        Button btn = sender as Button;
 
         // We then turn both the hidden and word into character arrays.
         hiddenChar = hidden.ToCharArray();
         wordChar = word.ToCharArray();
 
-        // This if statement block checks the word in uppercase and see if it contains the above letter (char array)
+        // The letter char variable will be the first element in btn.Text, since its a single character it will always be 0.
+        letter = btn.Text.ElementAt(0);
+
+        // This if statement block checks the word in uppercase and see if it contains the above letter (char)
         if (word.Contains(letter)) {     
 
             // Using a for loop, which carries on until it reaches the max length of the word, it checks
             // Whether the character in the word matches the letter guessed. 
             // If it does we assign to the hidden string the new letter.
             for (int i = 0; i < word.Length; i++) {
-                if (wordChar[i] == letter[0] && wordChar[i] != '-') { hiddenChar[i] = letter[0]; }
+                if (wordChar[i] == letter && wordChar[i] != '-') { hiddenChar[i] = letter; }
             }
 
             // Hidden then recompiles as a new string the above hidden character array with the new letter.
@@ -187,10 +192,10 @@ public partial class _Default : System.Web.UI.Page
 
             // Here we use a tiny if statement block to see how long it took the for the user to guess the word
             // And based on the amount of time took it gives a interactive score to reflect it.
-            if (seconds >= 28) { score = 300; }
-            else if (seconds >= 21) { score = 250; }
-            else if (seconds >= 14) { score = 200; }
-            else if (seconds >= 7) { score = 150; }
+            if (seconds >= 23) { score = 300; }
+            else if (seconds >= 18) { score = 250; }
+            else if (seconds >= 13) { score = 200; }
+            else if (seconds >= 8) { score = 150; }
             else { score = 100; }
 
             // We call the updateScreen() method to update all the visuals on screen.
@@ -199,7 +204,7 @@ public partial class _Default : System.Web.UI.Page
         // The else statement is called if the word didn't contain the letter.
         else {
             // It increments the letter label with each incorrect letter the user guessed.
-            lettersLbl.Text += e.CommandArgument;
+            lettersLbl.Text += letter;
 
             // It also increments the wrong guess by a 1 on each incorrect guess.
             wrongGuess++;
@@ -217,7 +222,7 @@ public partial class _Default : System.Web.UI.Page
         }
 
         // We use this foreach loop to make sure the same button cannot be pressed again.
-        foreach (Button b in btnList) { if (b.Text.Equals(e.CommandArgument)) { b.Enabled = false; } }
+        foreach (Button b in btnList) { if (b.Text.Equals(btn.Text)) { b.Enabled = false; } }
 
         // Finally if the hidden word has all been revealed (made equal to word), this if block would run. 
         if (hidden == word) {
@@ -236,20 +241,27 @@ public partial class _Default : System.Web.UI.Page
                 else if (wordChain >= 4) { score *= 1.40; }
                 else if (wordChain >= 3) { score *= 1.30; }
                 else if (wordChain >= 2) { score *= 1.20; }
- 
             }
             // If there was a wrong guess, we reset wordChain to 0.
             else { wordChain = 0; }
 
             // Here we increment correctCount by 1 each time, for each correct word guessed.
-            correctCount++;
             // Tiny if statement as a failsafe to make sure that the correctCount doesnt exceed the maxWords value.
-            if (correctCount > maxWords) { correctCount = maxWords; }
+            //if (correctCount > maxWords) { correctCount = maxWords; }
             // Here we set the boolean for correctWord to true to trigger the if statement in updateScreen.
             correctWord = true;
 
             // This if statement is called as long as there ARE items in the dictionary remaining.
-            if (splitFile.Count() > 0) {
+            if (splitFile.Count() == 0) {
+                correctCount++;
+                // In this case we update the visuals with updateScreen, and then call the endScreen method.
+                updateScreen();
+                endScreen();
+
+            }
+            // Else statement is called if there is NO more items left inside the dictionary
+            else {
+                correctCount++;
                 // Because we got the word right and we want to go through to the next item in the dictionary
                 // We remove the current item we have at the random index from the dictionary.
                 splitFile.Remove(splitFile.Keys.ElementAt(randomIndex));
@@ -259,12 +271,6 @@ public partial class _Default : System.Web.UI.Page
                 updateScreen();
                 // Finally we call setup to generate the next word inside the dictionary.
                 setup();
-            }
-            // Else statement is called if there is NO more items left inside the dictionary
-            else {
-                // In this case we update the visuals with updateScreen, and then call the endScreen method.
-                updateScreen();
-                endScreen();
             }
         }
     }
@@ -315,19 +321,19 @@ public partial class _Default : System.Web.UI.Page
         // As seen the minimum 1.1x bonus is always there, but if the user gets over 63% of the word list
         // guessed the final multiplier rises accordingly.
         if (correctCount == maxWords) {
-            scoreLbl.Text = String.Format("[FINAL SCORE: {0}] [2x BONUS! = {1}]", currentScore, Math.Ceiling(currentScore * 2));
+            scoreLbl.Text = String.Format("[FINAL SCORE: {0}] [2x BONUS! = {1}]", Math.Ceiling(currentScore), Math.Ceiling(currentScore * 2));
         }
         else if (correctCount >= Math.Ceiling(maxWords * 0.87)) {
-            scoreLbl.Text = String.Format("[FINAL SCORE: {0}] [1.75x BONUS! = {1}]", currentScore, Math.Ceiling(currentScore * 1.75));
+            scoreLbl.Text = String.Format("[FINAL SCORE: {0}] [1.75x BONUS! = {1}]", Math.Ceiling(currentScore), Math.Ceiling(currentScore * 1.75));
         }
         else if (correctCount >= Math.Ceiling(maxWords * 0.75)) {
-            scoreLbl.Text = String.Format("[FINAL SCORE: {0}] [1.5x BONUS! = {1}]", currentScore, Math.Ceiling(currentScore * 1.50));
+            scoreLbl.Text = String.Format("[FINAL SCORE: {0}] [1.5x BONUS! = {1}]", Math.Ceiling(currentScore), Math.Ceiling(currentScore * 1.50));
         }
         else if (correctCount >= Math.Ceiling(maxWords * 0.63)) {
-            scoreLbl.Text = String.Format("[FINAL SCORE: {0}] [1.25x BONUS! = {1}]", currentScore, Math.Ceiling(currentScore * 1.25));
+            scoreLbl.Text = String.Format("[FINAL SCORE: {0}] [1.25x BONUS! = {1}]", Math.Ceiling(currentScore), Math.Ceiling(currentScore * 1.25));
         }
         else {
-           scoreLbl.Text = String.Format("[FINAL SCORE: {0}] [1.1x BONUS! = {1}]", currentScore, Math.Ceiling(currentScore * 1.10));
+           scoreLbl.Text = String.Format("[FINAL SCORE: {0}] [1.1x BONUS! = {1}]", Math.Ceiling(currentScore), Math.Ceiling(currentScore * 1.10));
         }
 
         // Here we finally make the restart button visible so the user can start another game if necessary.
@@ -438,4 +444,5 @@ public partial class _Default : System.Web.UI.Page
         // Finally we restart the game by recalling setup().
         setup();
     }
+
 }
