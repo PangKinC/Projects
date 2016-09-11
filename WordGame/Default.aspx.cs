@@ -32,10 +32,11 @@ public partial class _Default : System.Web.UI.Page
     // Here we define all the variables that would be used in the program.
     private static string[] readFile;
     private static bool correctWord;
+    private static double maxLives;
     private static int correctCount;
     private static int maxWords;
-    private static double maxLives;
-   
+    private static int seconds { get; set; }
+
     private static double score;
     private static double currentScore;
     private static double multiplier;
@@ -50,24 +51,24 @@ public partial class _Default : System.Web.UI.Page
     private static string hidden;
     private static string hint;
 
-    private static int seconds { get; set; }
     private static Dictionary<string, string> splitFile = new Dictionary<string, string>();
     private static List<Button> btnList;    
 
     // The set of instructions which is done as soon as the page is loaded.
     protected void Page_Load(object sender, EventArgs e)
     {
- 
+
         // Here we add the all the different buttons on the form, representing each of the alphabet keys.
         btnList = new List<Button>() { qBtn, wBtn, eBtn, rBtn, tBtn, yBtn, uBtn, iBtn, oBtn, pBtn,
                                        aBtn, sBtn, dBtn, fBtn, gBtn, hBtn, jBtn, kBtn, lBtn,
                                        zBtn, xBtn, cBtn, vBtn, bBtn, nBtn, mBtn };
 
-        
-
         // This if statement goes through as long as the page is not in a postback state.
         if (!IsPostBack) 
         {
+            // Here we clear the Dictionary just incase there some items left in from a previous session.
+            splitFile.Clear();
+
             // The readFile variable reads our file from the resources directory.
             // Note that we don't need to specify the whole file path.
             readFile = File.ReadAllLines(System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, @"Resources\wordsP.txt"));
@@ -75,8 +76,7 @@ public partial class _Default : System.Web.UI.Page
             // We then use a lambda expression to split each respective part as a key and value in the dictionary.
             splitFile = readFile.Select(l => l.Split('_')).ToDictionary(a => a[0], a => a[1]);
             // Here we take the dictionary and order it randomly (shuffling) by using the random class and a lambda expression.
-            splitFile = splitFile.OrderBy(x => new Random().Next())
-               .ToDictionary(item => item.Key, item => item.Value);
+            splitFile = splitFile.OrderBy(x => new Random().Next()).ToDictionary(item => item.Key, item => item.Value);
 
             // We set these values all to 0 as a way to reset the game and to clear previous data on the browser.
             currentScore = 0;
@@ -209,7 +209,7 @@ public partial class _Default : System.Web.UI.Page
             // It also increments the wrong guess by a 1 on each incorrect guess.
             wrongGuess++;
             // Here we decrease the timer by 4 seconds for each wrong guess.
-            decreaseTime(4);
+            decreaseTime(5);
 
             // This mini if else statement block changes the multiplier depending on the number of incorrect guesses.
             if (wrongGuess >= 1 && wrongGuess < 3) { multiplier = 1.50; }
@@ -230,7 +230,7 @@ public partial class _Default : System.Web.UI.Page
             score *= multiplier;
 
             // We check if there was wrong guesses and whether seconds is not 0, if so this if statement block will run.
-            if (wrongGuess == 0 && seconds != 0) {
+            if (wrongGuess <= 3 && seconds != 0) {
                 // Here we increment wordChain by 1 each time.
                 wordChain = wordChain + 1;
 
@@ -240,7 +240,7 @@ public partial class _Default : System.Web.UI.Page
                 else if (wordChain >= 5) { score *= 1.50; }
                 else if (wordChain >= 4) { score *= 1.40; }
                 else if (wordChain >= 3) { score *= 1.30; }
-                else if (wordChain >= 2) { score *= 1.20; }
+                else { score *= 1.20; }
             }
             // If there was a wrong guess, we reset wordChain to 0.
             else { wordChain = 0; }
@@ -251,16 +251,9 @@ public partial class _Default : System.Web.UI.Page
             // Here we set the boolean for correctWord to true to trigger the if statement in updateScreen.
             correctWord = true;
 
-            // This if statement is called as long as there ARE items in the dictionary remaining.
-            if (splitFile.Count() == 0) {
-                correctCount++;
-                // In this case we update the visuals with updateScreen, and then call the endScreen method.
-                updateScreen();
-                endScreen();
-
-            }
-            // Else statement is called if there is NO more items left inside the dictionary
-            else {
+            // This if statement is called if there is more then 1 item in the dictonary.
+            if (splitFile.Count() > 1) {
+                // We increment correctCount by 1 every time.
                 correctCount++;
                 // Because we got the word right and we want to go through to the next item in the dictionary
                 // We remove the current item we have at the random index from the dictionary.
@@ -271,6 +264,16 @@ public partial class _Default : System.Web.UI.Page
                 updateScreen();
                 // Finally we call setup to generate the next word inside the dictionary.
                 setup();
+
+            }
+            // Else statement is called when the its the last item remaining in dictionary.
+            else
+            {
+                // We still increment correctCount as user did guess the word correctly.
+                correctCount++;
+                // In this case we update the visuals with updateScreen, and then call the endScreen method.
+                updateScreen();
+                endScreen();
             }
         }
     }
@@ -314,11 +317,11 @@ public partial class _Default : System.Web.UI.Page
         }
     }
 
-    // The endScreen is as it sounds, the final visual to be shown either when game ends or when user quits.
+    // The endScreen is as it sounds, the final visual to be shown either when game ends or when the user quits.
     public void endScreen()
     {
         // Here we use another if statement block, to check how much words was correct out of the max available.
-        // As seen the minimum 1.1x bonus is always there, but if the user gets over 63% of the word list
+        // As seen the minimum 1.1x bonus is always there, but if the user gets over 63% of the word list 
         // guessed the final multiplier rises accordingly.
         if (correctCount == maxWords) {
             scoreLbl.Text = String.Format("[FINAL SCORE: {0}] [2x BONUS! = {1}]", Math.Ceiling(currentScore), Math.Ceiling(currentScore * 2));
@@ -397,8 +400,13 @@ public partial class _Default : System.Web.UI.Page
             updateScreen();
 
             // Because we want to move onto the next random word, we also need to remove the current item from here.
-            splitFile.Remove(splitFile.Keys.ElementAt(randomIndex));
-            splitFile.Remove(splitFile.Values.ElementAt(randomIndex));
+            // Note that it uses if statement check that there are still elements in the dictionary.
+            if (splitFile.Count > 0)
+            {
+                splitFile.Remove(splitFile.Keys.ElementAt(randomIndex));
+                splitFile.Remove(splitFile.Values.ElementAt(randomIndex));
+            }
+
 
             // Tiny if else statement block to check whether lives is over 0, if it is we generate a new word.
             // Otherwise we end the game and call endScreen.
@@ -416,6 +424,8 @@ public partial class _Default : System.Web.UI.Page
     // Clicking on the Restart button is pretty much a carbon copy of calling page load again.
     protected void newBtn_Click(object sender, EventArgs e)
     {
+        // Fail safe we clear the dictionary just incase there was remaining items from last game.
+        splitFile.Clear();
         // Again we assign to the splitFile dictionary the words we read from the file and split them.
         splitFile = readFile.Select(l => l.Split('_')).ToDictionary(a => a[0], a => a[1]);
         // Then again we order and shuffle the list, so the items order are not the same as before.
