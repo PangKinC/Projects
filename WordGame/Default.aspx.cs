@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI.WebControls;
 using System.Text.RegularExpressions;
-using System.Web.UI;
 
 // First Project: Word Guessing Game.
-/* My first project for portfolio, is a simple rendition of a word guessing game, unlike the traditional hangman 
- * game this, carries on until the timer expires.
- * Some features include having a final score which goes up for every word the user gets right and 
- * a multiplier which increases/decrease the less letters a user guesses incorrectly,
- * along with a hint for each of the hidden word */
+// My first project for portfolio, is a simple rendition of a word guessing game, unlike the traditional hangman 
+// game this game carries gives a set time for a player to guess the word.
+// If the time expires, the player set lives decreases and the next word is genearated.
+// Other features include having a interactive score that changes accordingly to the amount of time it takes
+// for the player to guess the word, DOUBLE multipliers for having no wrong guesses and getting consecutive words gotten.
+// Finally of course there's timer and hint for each of the word generated.
 
 // To-do List:
 // -- Add timer to the game, decrement/increment depending if user guesses word correctly.
@@ -57,7 +57,6 @@ public partial class _Default : System.Web.UI.Page
     // The set of instructions which is done as soon as the page is loaded.
     protected void Page_Load(object sender, EventArgs e)
     {
-
         // Here we add the all the different buttons on the form, representing each of the alphabet keys.
         btnList = new List<Button>() { qBtn, wBtn, eBtn, rBtn, tBtn, yBtn, uBtn, iBtn, oBtn, pBtn,
                                        aBtn, sBtn, dBtn, fBtn, gBtn, hBtn, jBtn, kBtn, lBtn,
@@ -68,10 +67,9 @@ public partial class _Default : System.Web.UI.Page
         {
             // Here we clear the Dictionary just incase there some items left in from a previous session.
             splitFile.Clear();
-
             // The readFile variable reads our file from the resources directory.
             // Note that we don't need to specify the whole file path.
-            readFile = File.ReadAllLines(System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, @"Resources\wordsP.txt"));
+            readFile = File.ReadAllLines(System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, @"Resources\wordsN.txt"));
             // Here we split a the above readFile (which is a string array) by the character _ to seperate the word and hint.
             // We then use a lambda expression to split each respective part as a key and value in the dictionary.
             splitFile = readFile.Select(l => l.Split('_')).ToDictionary(a => a[0], a => a[1]);
@@ -192,11 +190,12 @@ public partial class _Default : System.Web.UI.Page
 
             // Here we use a tiny if statement block to see how long it took the for the user to guess the word
             // And based on the amount of time took it gives a interactive score to reflect it.
-            if (seconds >= 23) { score = 300; }
-            else if (seconds >= 18) { score = 250; }
-            else if (seconds >= 13) { score = 200; }
-            else if (seconds >= 8) { score = 150; }
-            else { score = 100; }
+            if (seconds >= 25) { score = 300; }
+            else if (seconds >= 22) { score = 250; }
+            else if (seconds >= 19) { score = 200; }
+            else if (seconds >= 15) { score = 150; }
+            else if (seconds >= 10) { score = 100; }
+            else { score = 50; }
 
             // We call the updateScreen() method to update all the visuals on screen.
             updateScreen();
@@ -267,7 +266,6 @@ public partial class _Default : System.Web.UI.Page
                 updateScreen();
                 // Finally we call setup to generate the next word inside the dictionary.
                 setup();
-
             }
             // Else statement is called when the its the last item remaining in dictionary.
             else
@@ -394,7 +392,6 @@ public partial class _Default : System.Web.UI.Page
             // Finally we assign to the timer label the seconds remaining
             timeLbl.Text = "Time remaining: " + seconds.ToString();
         }
-
         // Else if seconds is not over (aka is 0) this block of instructions goes off.
         else {
             // Because time has ran out for the current hidden word, we decrement maxLives by 1.
@@ -404,8 +401,7 @@ public partial class _Default : System.Web.UI.Page
 
             // Because we want to move onto the next random word, we also need to remove the current item from here.
             // Note that it uses if statement check that there are still elements in the dictionary.
-            if (splitFile.Count > 0)
-            {
+            if (splitFile.Count > 0) {
                 splitFile.Remove(splitFile.Keys.ElementAt(randomIndex));
                 splitFile.Remove(splitFile.Values.ElementAt(randomIndex));
             }
@@ -431,8 +427,7 @@ public partial class _Default : System.Web.UI.Page
         // Again we assign to the splitFile dictionary the words we read from the file and split them.
         splitFile = readFile.Select(l => l.Split('_')).ToDictionary(a => a[0], a => a[1]);
         // Then again we order and shuffle the list, so the items order are not the same as before.
-        splitFile = splitFile.OrderBy(x => new Random().Next())
-           .ToDictionary(item => item.Key, item => item.Value);
+        splitFile = splitFile.OrderBy(x => new Random().Next()).ToDictionary(item => item.Key, item => item.Value);
 
         // We set these values all to 0 as we want the game to be a fresh start.
         currentScore = 0;
