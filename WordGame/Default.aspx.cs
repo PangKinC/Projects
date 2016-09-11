@@ -35,14 +35,14 @@ public partial class _Default : System.Web.UI.Page
     private static double maxLives;
     private static int correctCount;
     private static int maxWords;
-    private static int seconds { get; set; }
+    private static int randomIndex;
 
     private static double score;
     private static double currentScore;
     private static double multiplier;
     private static int wordChain;
-    private static int randomIndex;
     private static int wrongGuess;
+    private static int wrongWord;
 
     private static char[] hiddenChar;
     private static char[] wordChar;
@@ -50,7 +50,7 @@ public partial class _Default : System.Web.UI.Page
     private static string word;
     private static string hidden;
     private static string hint;
-
+    private static int seconds { get; set; }
     private static Dictionary<string, string> splitFile = new Dictionary<string, string>();
     private static List<Button> btnList;    
 
@@ -82,6 +82,7 @@ public partial class _Default : System.Web.UI.Page
             multiplier = 0;
             wordChain = 0;
             correctCount = 0;
+            wrongWord = 0;
 
             // Here we set the maxWords to max items found in the dictionary. 
             maxWords = splitFile.Count();
@@ -94,6 +95,7 @@ public partial class _Default : System.Web.UI.Page
             chainLbl.Text = "Word Chain Multiplier: x" + wordChain;
             countLbl.Text = "Correct Words: 0 out of " + maxWords;
             livesLbl.Text = "Lives remaining: " + maxLives;
+            wrongLbl.Text = "Wrong Words: 0 out of " + maxWords;
 
             // Then calls the setup method, which sets up a new hidden word and starts the timer for the game.
             setup();    
@@ -268,8 +270,7 @@ public partial class _Default : System.Web.UI.Page
                 setup();
             }
             // Else statement is called when the its the last item remaining in dictionary.
-            else
-            {
+            else {
                 // We still increment correctCount as user did guess the word correctly.
                 correctCount++;
                 // In this case we update the visuals with updateScreen, and then call the endScreen method.
@@ -277,6 +278,7 @@ public partial class _Default : System.Web.UI.Page
                 endScreen();
             }
         }
+
     }
  
     // The updateScreen() method is used to refresh all the relevant information shown on screen to the user.
@@ -306,9 +308,11 @@ public partial class _Default : System.Web.UI.Page
             scoreLbl.Text = "SCORE: " + Math.Ceiling(currentScore);
         }
 
-        // We update these respective labels for the multiplier, number of wrong guesses and remaining lives.
+        // We update these respective labels for the multiplier, number of wrong guesses, wrong words count
+        // And finally remaining lives.
         guessNoLbl.Text = "Wrong Letter Count: " + wrongGuess;
         multiLbl.Text = "Correct Guess Multiplier: x" + multiplier;
+        wrongLbl.Text = String.Format("Wrong Words: {0} out of {1}", wrongWord, maxWords);
         livesLbl.Text = "Lives remaining: " + maxLives;
 
         // Finally we use this for loop to keep the string format the same throughout the game.
@@ -327,13 +331,13 @@ public partial class _Default : System.Web.UI.Page
         if (correctCount == maxWords) {
             scoreLbl.Text = String.Format("[FINAL SCORE: {0}] [2x BONUS! = {1}]", Math.Ceiling(currentScore), Math.Ceiling(currentScore * 2));
         }
-        else if (correctCount >= Math.Ceiling(maxWords * 0.87)) {
+        else if (correctCount >= Math.Round(maxWords * 0.87)) {
             scoreLbl.Text = String.Format("[FINAL SCORE: {0}] [1.75x BONUS! = {1}]", Math.Ceiling(currentScore), Math.Ceiling(currentScore * 1.75));
         }
-        else if (correctCount >= Math.Ceiling(maxWords * 0.75)) {
+        else if (correctCount >= Math.Round(maxWords * 0.75)) {
             scoreLbl.Text = String.Format("[FINAL SCORE: {0}] [1.5x BONUS! = {1}]", Math.Ceiling(currentScore), Math.Ceiling(currentScore * 1.50));
         }
-        else if (correctCount >= Math.Ceiling(maxWords * 0.63)) {
+        else if (correctCount >= Math.Round(maxWords * 0.63)) {
             scoreLbl.Text = String.Format("[FINAL SCORE: {0}] [1.25x BONUS! = {1}]", Math.Ceiling(currentScore), Math.Ceiling(currentScore * 1.25));
         }
         else {
@@ -396,6 +400,7 @@ public partial class _Default : System.Web.UI.Page
         else {
             // Because time has ran out for the current hidden word, we decrement maxLives by 1.
             maxLives--;
+            wrongWord++;
             // We then call updateScreen to update for the above visuals.
             updateScreen();
 
@@ -435,6 +440,7 @@ public partial class _Default : System.Web.UI.Page
         multiplier = 0;
         wordChain = 0;
         correctCount = 0;
+        wrongWord = 0;
 
         // Here we set the maxWords to max items found in the dictionary. 
         maxWords = splitFile.Count();
@@ -442,11 +448,12 @@ public partial class _Default : System.Web.UI.Page
         maxLives = Math.Floor((double)maxWords / 2);
 
         // Here we update these labels to the default values required.
-        // We use a string format this time for the count label.
+        // We use a string format this time for the count and wrong label.
         scoreLbl.Text = "SCORE: " + currentScore;
         chainLbl.Text = "Current Word Chain Multiplier: x" + wordChain;
         livesLbl.Text = "Lives remaining: " + maxLives;
         countLbl.Text = String.Format("Correct Words: {0} out of {1}", correctCount, maxWords);
+        wrongLbl.Text = String.Format("Wrong Words: {0} out of {1}", wrongWord, maxWords);
 
         // Finally we restart the game by recalling setup().
         setup();

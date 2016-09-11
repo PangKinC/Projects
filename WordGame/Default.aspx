@@ -139,14 +139,16 @@
         <asp:Label ID="wordLbl" runat="server" Font-Size="X-Large"></asp:Label>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <br />
         <br />
-            <asp:Label ID="incorrectLbl" runat="server" Text="Incorrect Letters:" Font-Italic="True"></asp:Label>
-&nbsp;<asp:Label ID="lettersLbl" runat="server"></asp:Label>
-        <br />
             <asp:Label ID="hintTextLbl" runat="server" Font-Bold="True" Text="HINT: "></asp:Label>
         <asp:Label ID="hintLbl" runat="server"></asp:Label>
+        <br />
+            <asp:Label ID="incorrectLbl" runat="server" Text="Incorrect Letters:" Font-Italic="True"></asp:Label>
+&nbsp;<asp:Label ID="lettersLbl" runat="server"></asp:Label>
             <br />
             <br />
-            <asp:Label ID="chainLbl" runat="server"></asp:Label>
+        <asp:Label ID="guessNoLbl" runat="server"></asp:Label>
+            <br />
+            <asp:Label ID="wrongLbl" runat="server"></asp:Label>
             <br />
             <asp:Label ID="countLbl" runat="server"></asp:Label>
         <br />
@@ -171,11 +173,10 @@
         <asp:Button ID="gBtn" runat="server" Text="G" OnClick="letterGuessed" />
         <asp:Button ID="hBtn" runat="server" Text="H" OnClick="letterGuessed" />
         <asp:Button ID="jBtn" runat="server" Text="J" OnClick="letterGuessed" />
-        <asp:Button ID="kBtn" runat="server" Text="K" OnClick="letterGuessed" />
+        <asp:Button ID="kBtn" runat="server" Text="K" OnClick="letterGuessed" Width="23px" />
         <asp:Button ID="lBtn" runat="server" Text="L" OnClick="letterGuessed" />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:Label ID="guessNoLbl" runat="server"></asp:Label>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:Label ID="multiLbl" runat="server"></asp:Label>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <br />
         <asp:Button ID="zBtn" runat="server" Text="Z" OnClick="letterGuessed" />
         <asp:Button ID="xBtn" runat="server" Text="X" OnClick="letterGuessed" />
@@ -184,8 +185,9 @@
         <asp:Button ID="bBtn" runat="server" Text="B" OnClick="letterGuessed" />
         <asp:Button ID="nBtn" runat="server" Text="N" OnClick="letterGuessed" />
         <asp:Button ID="mBtn" runat="server" Text="M" OnClick="letterGuessed" />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;<asp:Label ID="multiLbl" runat="server"></asp:Label>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br /> <br /> 
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+            <asp:Label ID="chainLbl" runat="server"></asp:Label>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br /> <br /> 
             <asp:Label ID="livesLbl" runat="server"></asp:Label>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <br />
