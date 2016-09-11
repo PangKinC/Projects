@@ -230,17 +230,20 @@ public partial class _Default : System.Web.UI.Page
             score *= multiplier;
 
             // We check if there was wrong guesses and whether seconds is not 0, if so this if statement block will run.
-            if (wrongGuess <= 3 && seconds != 0) {
+            if (wrongGuess == 0 && seconds != 0) {
                 // Here we increment wordChain by 1 each time.
                 wordChain = wordChain + 1;
 
                 // A nested mini if statement block, gives a SECOND multiplier based on how long the player can chain correct words for.
                 // So for best results player should no get any wrong guesses and will consecutively guess the right word.
-                if (wordChain >= 6) { score *= 2.00; }
-                else if (wordChain >= 5) { score *= 1.50; }
-                else if (wordChain >= 4) { score *= 1.40; }
-                else if (wordChain >= 3) { score *= 1.30; }
-                else { score *= 1.20; }
+                // Note that it also checks how long user took to guess the word correctly and see which bonus matches for it.
+                // If the user takes too long wordChain would get reset back to 0.
+                if (wordChain >= 6 && seconds >= 26) { score *= 2.00; }
+                else if (wordChain >= 5 && seconds >= 21) { score *= 1.50; }
+                else if (wordChain >= 4 && seconds >= 18) { score *= 1.40; }
+                else if (wordChain >= 3 && seconds >= 14) { score *= 1.30; }
+                else if (wordChain >= 2 && seconds >= 10) { score *= 1.20; }
+                else if (seconds < 10) { score *= 1.00; wordChain = 0; }
             }
             // If there was a wrong guess, we reset wordChain to 0.
             else { wordChain = 0; }
@@ -290,12 +293,12 @@ public partial class _Default : System.Web.UI.Page
             // So by storing it inside currentScore, it would just add the new score onto the current.
             currentScore += score;
 
-            // A tiny nested if statement block to check what current word chain is and updates the label accordingly.
-            if (wordChain >= 6) { chainLbl.Text = "Word Chain Multiplier: x2"; }
-            else if (wordChain >= 5) { chainLbl.Text = "Word Chain Multiplier: x1.5"; }
-            else if (wordChain >= 4) { chainLbl.Text = "Word Chain Multiplier: x1.4"; }
-            else if (wordChain >= 3) { chainLbl.Text = "Word Chain Multiplier: x1.3"; }
-            else if (wordChain >= 2) { chainLbl.Text = "Word Chain Multiplier: x1.2"; }
+            // A tiny nested if statement block to check what current word chain and time is and updates the label accordingly.
+            if (wordChain >= 6 && seconds >= 25) { chainLbl.Text = "Word Chain Multiplier: x2"; }
+            else if (wordChain >= 5 && seconds >= 21) { chainLbl.Text = "Word Chain Multiplier: x1.5"; }
+            else if (wordChain >= 4 && seconds >= 17) { chainLbl.Text = "Word Chain Multiplier: x1.4"; }
+            else if (wordChain >= 3 && seconds >= 13) { chainLbl.Text = "Word Chain Multiplier: x1.3"; }
+            else if (wordChain >= 2 && seconds >= 9) { chainLbl.Text = "Word Chain Multiplier: x1.2"; }
             else { chainLbl.Text = "Word Chain Multiplier: x0"; }
 
             // We update the label with how much correct words was guessed out of the max amount of words.
@@ -407,7 +410,6 @@ public partial class _Default : System.Web.UI.Page
                 splitFile.Remove(splitFile.Values.ElementAt(randomIndex));
             }
 
-
             // Tiny if else statement block to check whether lives is over 0, if it is we generate a new word.
             // Otherwise we end the game and call endScreen.
             if (maxLives > 0) { setup(); } 
@@ -454,5 +456,4 @@ public partial class _Default : System.Web.UI.Page
         // Finally we restart the game by recalling setup().
         setup();
     }
-
 }
