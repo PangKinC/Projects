@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -20,6 +21,69 @@ namespace RestaurantLocator.Controllers
                               select m;
 
             return View(restaurants);
+        }
+
+        [HttpPost]
+        public ActionResult Index(string address)
+        {
+            var restaurants = from m in db.Restaurants
+                              select m;
+
+            if (string.IsNullOrEmpty(address)) { return View(restaurants); }
+
+            var matchFound = GoogleMapsAPIHelpersCS.GetGeocodingSearchResults(address);
+            var matchCount = matchFound.Elements("result").Count();
+
+            if (matchCount == 0) {
+                ViewData["NoMatch"] = true;
+                return View(restaurants);
+            }
+            else if (matchCount == 1) {
+                return RedirectToAction("AddressResult", new { Address = matchFound.Element("result").Element("formatted_address").Value });
+            }
+            else {
+                var matchList = from match in matchFound.Elements("result")
+                                let formatted_address = match.Element("formatted_address")
+                                .Value
+                                select formatted_address;
+                ViewData["MatchResults"] = matchList;
+
+                return View(restaurants);
+            }
+
+        }
+
+        public ActionResult AddressResult(string address)
+        {
+            if (string.IsNullOrEmpty(address)) { return RedirectToAction("Index"); }
+
+            var matchFound = GoogleMapsAPIHelpersCS.GetGeocodingSearchResults(address);
+
+            var ltde = Convert.ToDecimal(matchFound.Element("result").Element("geometry").Element("location").Element("lat").Value, NumberFormatInfo.InvariantInfo);
+
+            var lgte = Convert.ToDecimal(matchFound.Element("result").Element("geometry").Element("location").Element("lng").Value, NumberFormatInfo.InvariantInfo);
+
+            var nearbyRes = from r in db.Restaurants
+                            where Math.Abs(r.Latitude - ltde) < 0.25M &&
+                            Math.Abs(r.Longitude - lgte) < 0.25M
+                            select new SortLocations()
+                            {
+
+                                Name = r.Name,
+                                Cuisine = r.Cuisine,
+                                Address = r.Address,
+                                City = r.City,
+                                Country = r.Country,
+                                Postcode = r.Postcode,
+                                PhoneNo = r.Phone_Number,
+                                Price = r.Price_Range,
+                                Latitude = r.Latitude,
+                                Longitude = r.Longitude,
+                                AddressLatitude = ltde,
+                                AddressLongitude = lgte
+                            };
+
+            return View(nearbyRes);
         }
 
         public ActionResult CreateData()

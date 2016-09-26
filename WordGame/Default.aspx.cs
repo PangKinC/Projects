@@ -69,7 +69,7 @@ public partial class _Default : System.Web.UI.Page
             splitFile.Clear();
             // The readFile variable reads our file from the resources directory.
             // Note that we don't need to specify the whole file path.
-            readFile = File.ReadAllLines(System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, @"Resources\wordsN.txt"));
+            readFile = File.ReadAllLines(System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, @"Resources\wordsP.txt"));
             // Here we split a the above readFile (which is a string array) by the character _ to seperate the word and hint.
             // We then use a lambda expression to split each respective part as a key and value in the dictionary.
             splitFile = readFile.Select(l => l.Split('_')).ToDictionary(a => a[0], a => a[1]);

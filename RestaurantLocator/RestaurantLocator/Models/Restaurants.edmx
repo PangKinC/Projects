@@ -11,12 +11,13 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Cuisine" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cuisine" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
           <Property Name="City" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Country" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Postcode" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="Phone_Number" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Postcode" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Phone_Number" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Price_Range" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Latitude" Type="decimal" Precision="10" Scale="7" Nullable="false" />
           <Property Name="Longitude" Type="decimal" Precision="10" Scale="7" Nullable="false" />
         </EntityType>
@@ -34,12 +35,13 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Cuisine" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cuisine" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Postcode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Phone_Number" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Postcode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone_Number" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price_Range" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Latitude" Type="Decimal" Precision="10" Scale="7" Nullable="false" />
           <Property Name="Longitude" Type="Decimal" Precision="10" Scale="7" Nullable="false" />
         </EntityType>
@@ -63,6 +65,7 @@
                 <ScalarProperty Name="Country" ColumnName="Country" />
                 <ScalarProperty Name="Postcode" ColumnName="Postcode" />
                 <ScalarProperty Name="Phone_Number" ColumnName="Phone_Number" />
+                <ScalarProperty Name="Price_Range" ColumnName="Price_Range" />
                 <ScalarProperty Name="Latitude" ColumnName="Latitude" />
                 <ScalarProperty Name="Longitude" ColumnName="Longitude" />
               </MappingFragment>

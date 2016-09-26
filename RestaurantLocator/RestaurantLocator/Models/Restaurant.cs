@@ -22,6 +22,7 @@ namespace RestaurantLocator.Models
         public string Country { get; set; }
         public string Postcode { get; set; }
         public string Phone_Number { get; set; }
+        public string Price_Range { get; set; }
         public decimal Latitude { get; set; }
         public decimal Longitude { get; set; }
     }

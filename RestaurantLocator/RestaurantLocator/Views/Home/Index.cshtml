@@ -5,11 +5,46 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2> Restaurant Locator </h2>
 
 <p>
-    @Html.ActionLink("Add New Restaurant", "CreateData") 
+    @Html.ActionLink("Add New Restaurant", "CreateData")
 </p>
+
+<p> Enter your address, country or postcode to locate nearby restaurants </p>
+
+@using (Html.BeginForm())
+{
+    <b> Details: </b>
+    @Html.TextBox("address");
+    <input type="submit" value="Search" />
+    <br />
+    <i> e.g. 11 Palmerston Road, London, E17 6PF </i>
+
+    if (ViewData["NoMatch"] != null)
+    {
+        <div class="input-validation-error">
+            Address was not found, please try again.     
+        </div>
+    }
+
+    var similarMatches = ViewData["MatchResults"] as IEnumerable<string>;
+    if (similarMatches != null)
+    {
+        <div style="padding-left: 25px; margin-top: 10px;">
+            <b> Following matches found ... </b>
+            <ol>
+                @foreach (var match in similarMatches)
+                {
+                    <li> 
+                        @Html.ActionLink(match, "AddressResults", new { Address = match }) 
+                    </li>
+                }
+            </ol>
+        </div>
+    }
+
+}
 
 <table class="table">
     <tr>
@@ -28,10 +63,13 @@
         <th>
             @Html.DisplayNameFor(model => model.Postcode)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price_Range)
+        </th>
     </tr>
 
     @foreach (var item in Model)
-    {
+    { 
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
@@ -47,6 +85,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Postcode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price_Range)
             </td>
             <td>
                 @Html.ActionLink("Restaurant Details", "ReadData", new { id = item.ID }) |

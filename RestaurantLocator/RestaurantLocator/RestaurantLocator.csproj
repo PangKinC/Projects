@@ -140,15 +140,15 @@
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\Restaurant.Context.tt">
+    <Content Include="Models\Restaurants.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Restaurant.edmx</DependentUpon>
-      <LastGenOutput>Restaurant.Context.cs</LastGenOutput>
+      <DependentUpon>Restaurants.edmx</DependentUpon>
+      <LastGenOutput>Restaurants.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Restaurant.tt">
+    <Content Include="Models\Restaurants.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Restaurant.edmx</DependentUpon>
-      <LastGenOutput>Restaurant1.cs</LastGenOutput>
+      <DependentUpon>Restaurants.edmx</DependentUpon>
+      <LastGenOutput>Restaurants.cs</LastGenOutput>
     </Content>
     <Content Include="scripts\ai.0.22.19-build00125.js" />
     <Content Include="scripts\ai.0.22.19-build00125.min.js" />
@@ -160,12 +160,12 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <EntityDeploy Include="Models\Restaurant.edmx">
+    <EntityDeploy Include="Models\Restaurants.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Restaurant.Designer.cs</LastGenOutput>
+      <LastGenOutput>Restaurants.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\Restaurant.edmx.diagram">
-      <DependentUpon>Restaurant.edmx</DependentUpon>
+    <Content Include="Models\Restaurants.edmx.diagram">
+      <DependentUpon>Restaurants.edmx</DependentUpon>
     </Content>
     <None Include="scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="scripts\bootstrap.js" />
@@ -184,24 +184,25 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="HelperClasses\GoogleMapsAPIHelpersCS.cs" />
-    <Compile Include="Models\Restaurant.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Restaurant.Context.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Restaurant.cs">
-      <DependentUpon>Restaurant.tt</DependentUpon>
+      <DependentUpon>Restaurants.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Restaurant.Designer.cs">
+    <Compile Include="Models\Restaurants.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Restaurant.edmx</DependentUpon>
+      <DependentUpon>Restaurants.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Restaurant1.cs">
+    <Compile Include="Models\Restaurants.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Restaurant.tt</DependentUpon>
+      <DependentUpon>Restaurants.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Restaurants.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Restaurants.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SortLocations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -219,6 +220,7 @@
     <Content Include="Views\Home\CreateData.cshtml" />
     <Content Include="Views\Home\UpdateData.cshtml" />
     <Content Include="Views\Home\DeleteData.cshtml" />
+    <Content Include="Views\Home\AddressResult.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
