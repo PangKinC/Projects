@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RestaurantDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'RestaurantDB.dbo.Restaurant' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Restaurant">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Address" />
+      <PropertyRef Name="City" />
+      <PropertyRef Name="Country" />
+      <PropertyRef Name="Postcode" />
+      <PropertyRef Name="Phone Number" />
+      <PropertyRef Name="Cuisine" />
+      <PropertyRef Name="Latitude" />
+      <PropertyRef Name="Longitude" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="City" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Country" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Postcode" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Phone Number" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="Cuisine" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Latitude" Type="decimal" Precision="10" Scale="7" Nullable="false" />
+    <Property Name="Longitude" Type="decimal" Precision="10" Scale="7" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="RestaurantDBModelStoreContainer">
+    <EntitySet Name="Restaurant" EntityType="Self.Restaurant" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Restaurant].[ID] AS [ID], 
+    [Restaurant].[Name] AS [Name], 
+    [Restaurant].[Address] AS [Address], 
+    [Restaurant].[City] AS [City], 
+    [Restaurant].[Country] AS [Country], 
+    [Restaurant].[Postcode] AS [Postcode], 
+    [Restaurant].[Phone Number] AS [Phone Number], 
+    [Restaurant].[Cuisine] AS [Cuisine], 
+    [Restaurant].[Latitude] AS [Latitude], 
+    [Restaurant].[Longitude] AS [Longitude]
+    FROM [dbo].[Restaurant] AS [Restaurant]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,64 @@
+﻿@model RestaurantLocator.Models.Restaurant
+
+@{
+    ViewBag.Title = "ReadData";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<h2>Restaurant Details</h2>
+
+<div>
+    <h4> Restaurant </h4>
+    <hr/>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cuisine)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Cuisine)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Country)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Country)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Postcode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Postcode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone_Number)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Phone_Number)
+        </dd>
+    </dl>
+</div>
+@Html.ActionLink("Back to Index", "Index")
