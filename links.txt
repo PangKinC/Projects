@@ -1,3 +1,4 @@
 http://www.4guysfromrolla.com/articles/081810-1.aspx
 http://www.4guysfromrolla.com/articles/051910-1.aspx
 http://www.dotnetfunda.com/articles/show/2828/developing-a-star-rating-in-aspnet-mvc
+https://demos.devexpress.com/MVCxMultiUseExtensionsDemos/RatingControl/Voting
