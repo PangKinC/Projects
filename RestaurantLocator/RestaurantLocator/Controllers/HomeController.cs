@@ -58,32 +58,31 @@ namespace RestaurantLocator.Controllers
             if (string.IsNullOrEmpty(address)) { return RedirectToAction("Index"); }
 
             var matchFound = GoogleMapsAPIHelpersCS.GetGeocodingSearchResults(address);
-
             var ltde = Convert.ToDecimal(matchFound.Element("result").Element("geometry").Element("location").Element("lat").Value, NumberFormatInfo.InvariantInfo);
-
             var lgte = Convert.ToDecimal(matchFound.Element("result").Element("geometry").Element("location").Element("lng").Value, NumberFormatInfo.InvariantInfo);
 
             var nearbyRes = from r in db.Restaurants
                             where Math.Abs(r.Latitude - ltde) < 0.25M &&
                             Math.Abs(r.Longitude - lgte) < 0.25M
+                            //select r;
                             select new SortLocations()
                             {
-
                                 Name = r.Name,
                                 Cuisine = r.Cuisine,
                                 Address = r.Address,
                                 City = r.City,
                                 Country = r.Country,
                                 Postcode = r.Postcode,
-                                PhoneNo = r.Phone_Number,
-                                Price = r.Price_Range,
+                                Phone_Number = r.Phone_Number,
+                                Price_Range = r.Price_Range,              
                                 Latitude = r.Latitude,
                                 Longitude = r.Longitude,
                                 AddressLatitude = ltde,
                                 AddressLongitude = lgte
                             };
 
-            return View(nearbyRes);
+            var sortedRes = nearbyRes.ToList().OrderBy(r => r.AddressDistance).ToList();
+            return View(sortedRes);
         }
 
         public ActionResult CreateData()

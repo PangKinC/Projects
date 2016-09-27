@@ -1,88 +1,110 @@
-﻿@model IEnumerable<RestaurantLocator.Models.Restaurant>
+﻿@model IEnumerable<RestaurantLocator.Models.SortLocations>
 
 @{
     ViewBag.Title = "AddressResult";
     Layout = "~/Views/Shared/_LayoutPage.cshtml";
 }
 
-<h2>AddressResult</h2>
+<h2>Restaurants near @Request.QueryString["Address"]!</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Search another location", "Index")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cuisine)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Address)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.City)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Country)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Postcode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Phone_Number)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price_Range)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Latitude)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Longitude)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cuisine)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.City)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Country)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Postcode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Phone_Number)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price_Range)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Latitude)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Longitude)
-        </td>
-        <td>
-            @Html.ActionLink("Restaurant Details", "ReadData", new { id = item.ID }) |
-            @Html.ActionLink("Update Restaurant Details", "UpdateData", new { id = item.ID }) |
-            @Html.ActionLink("Delete Restaurant", "DeleteData", new { id = item.ID })
-        </td>
-    </tr>
-}
 
-</table>
+    @if (Model.Count() == 0) {
+        <div id = "noResults">
+            <p>
+                There are no restaurants nearby to you, please search another location.
+            </p>
+        </div>
+    }
+    else {
+        <h3> Map </h3>
+
+        <br/>
+
+        <div id="map_canvas" class="map-area"> </div>
+  
+                var location = new List<string>();
+                var window = new List<string>();
+            
+                foreach (var restaurant in Model)
+                {
+                    location.Add(String.Format(
+                        @"{{
+                        title: ""Restaurant #{0}"",
+                        position: new google.maps.LatLng({1}, {2})
+                    }}",
+                        restaurant.Name,
+                        restaurant.Latitude,
+                        restaurant.Longitude
+                    ));
+
+
+                    window.Add(String.Format(
+                        @"{{
+                        content: ""<div class=\""infoWindow\""> <b>{0}</b> <br/> {1}<br/> {2}<br/> {3}<br/> {4}<br/>
+                        <a target=\""_blank\"" href=\""http://maps.google.com/maps?f=d&source=s_d&saddr=@{5}&daddr=@{6} \""> Directions </a> </div>""
+                        }}",
+                        restaurant.Name,
+                        restaurant.Address,
+                        restaurant.City,
+                        restaurant.Country,
+                        restaurant.Postcode,
+                        Server.UrlEncode(Request.QueryString["Address"]),
+                        Server.UrlEncode(restaurant.WholeString)
+                    ));
+                }
+            
+            <h3> List </h3>
+            <br />
+
+            <table cellspacing="0" cellpadding="5" rules="all" class="searchResults">
+                <tr>
+                    <th> Restaurant Name </th>
+                    <th> Distance </th>
+                    <th> Address </th>
+                </tr>
+     
+                 @foreach (var restaurant in Model)
+                 {
+                        <tr>
+                            <td> @restaurant.Name </td>
+                            <td> @restaurant.DisplayAddressDistance </td>
+                            <td>
+                                @restaurant.Address <br />
+                                @restaurant.City <br />
+                                @restaurant.Country <br />
+                                @restaurant.Postcode <br />
+                                <a target="_blank" href="http://maps.google.com/maps?f=d&source=s_d&saddr=@Server.UrlEncode(Request.QueryString["Address"])&daddr=@Server.UrlEncode(restaurant.WholeString)"> Directions</a>
+                            </td>
+                        </tr>
+                 }
+                
+                </table>
+                   
+                 var locationsArray = Html.Raw("[" + string.Join(",", location.ToArray()) + "]");
+                 var windowsArray = Html.Raw("[" + string.Join(",", window.ToArray()) + "]");
+               
+                <script type="text/javascript">
+                    init_map('map_canvas', @Model.ElementAt(0).AddressLatitude, @Model.ElementAt(0).AddressLongitude, 13, @locationsArray, @windowsArray);
+                </script>
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

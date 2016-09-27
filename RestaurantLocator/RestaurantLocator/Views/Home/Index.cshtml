@@ -1,17 +1,14 @@
 ﻿@model IEnumerable<RestaurantLocator.Models.Restaurant>
 
-
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
 }
 
 <h2> Restaurant Locator </h2>
+<br/>
 
-<p>
-    @Html.ActionLink("Add New Restaurant", "CreateData")
-</p>
-
-<p> Enter your address, country or postcode to locate nearby restaurants </p>
+<p> Enter your address, country or postcode to locate nearby restaurants. </p>
 
 @using (Html.BeginForm())
 {
@@ -21,16 +18,16 @@
     <br />
     <i> e.g. 11 Palmerston Road, London, E17 6PF </i>
 
-    if (ViewData["NoMatch"] != null)
-    {
-        <div class="input-validation-error">
-            Address was not found, please try again.     
-        </div>
-    }
+        if (ViewData["NoMatch"] != null)
+        {
+            <div class="input-validation-error">
+                Address was not found, please try again.        
+            </div>
+        }
 
-    var similarMatches = ViewData["MatchResults"] as IEnumerable<string>;
-    if (similarMatches != null)
-    {
+        var similarMatches = ViewData["MatchResults"] as IEnumerable<string>;
+
+        if (similarMatches != null) {
         <div style="padding-left: 25px; margin-top: 10px;">
             <b> Following matches found ... </b>
             <ol>
@@ -42,59 +39,40 @@
                 }
             </ol>
         </div>
+       }
     }
 
-}
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cuisine)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Address)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.City)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Postcode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price_Range)
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
-    { 
+    <br/>
+    <p>
+        @Html.ActionLink("Add New Restaurant", "CreateData")
+    </p>
+    
+    <table cellspacing="0" cellpadding="5" rules="all" class="searchResults">
         <tr>
+            <th> Restaurant Name </th>
+            <th> Cuisine </th>
+            <th> Address </th>
+            <th> Phone Number </th>
+            <th> Read / Update / Delete</th>
+        </tr>
+
+    @foreach (var restaurant in Model)
+    {
+        <tr>
+            <td> @restaurant.Name </td>
+            <td> @restaurant.Cuisine </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @restaurant.Address <br/>
+                @restaurant.City <br/>
+                @restaurant.Country <br/>
+                @restaurant.Postcode <br/>    
             </td>
+            <td> @restaurant.Phone_Number </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Cuisine)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Postcode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price_Range)
-            </td>
-            <td>
-                @Html.ActionLink("Restaurant Details", "ReadData", new { id = item.ID }) |
-                @Html.ActionLink("Update Restaurant Details", "UpdateData", new { id = item.ID }) |
-                @Html.ActionLink("Delete Restaurant", "DeleteData", new { id = item.ID })
+                @Html.ActionLink("Restaurant Details", "ReadData", new { id = restaurant.ID }) <br/>
+                @Html.ActionLink("Update Restaurant Details", "UpdateData", new { id = restaurant.ID }) <br/>
+                @Html.ActionLink("Delete Restaurant", "DeleteData", new { id = restaurant.ID }) <br/>
             </td>
         </tr>
     }
-
-</table>
+    </table>

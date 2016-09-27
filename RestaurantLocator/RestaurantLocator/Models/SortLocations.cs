@@ -5,9 +5,8 @@ using System.Web;
 
 namespace RestaurantLocator.Models
 {
-    public class SortLocations
+    public class SortLocations : Restaurant
     {
-
         public decimal AddressLatitude { get; set; }
         public decimal AddressLongitude { get; set; }
 
@@ -22,6 +21,7 @@ namespace RestaurantLocator.Models
                         Math.Pow(Convert.ToDouble(this.Longitude - this.AddressLongitude), 2.0)
                     ) * 62.1371192
                 );
+
             }
         }
 
@@ -31,7 +31,21 @@ namespace RestaurantLocator.Models
             {
                 return this.AddressDistance.ToString("0.00 Miles.");
             }
+        }
 
+        public string WholeString
+        {
+            get
+            {
+                var joinAddress = new List<string>(4);
+
+                if (!string.IsNullOrEmpty(this.Address)) { joinAddress.Add(this.Address); }
+                if (!string.IsNullOrEmpty(this.City)) { joinAddress.Add(this.City); }
+                if (!string.IsNullOrEmpty(this.Country)) { joinAddress.Add(this.Country); }
+                if (!string.IsNullOrEmpty(this.Postcode)) { joinAddress.Add(this.Postcode); }
+
+                return string.Join(", ", joinAddress.ToArray());
+            }
         }
 
     }
