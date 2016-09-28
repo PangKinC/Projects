@@ -25,6 +25,7 @@ namespace RestaurantLocator.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Rate> Rates { get; set; }
         public virtual DbSet<Restaurant> Restaurants { get; set; }
     }
 }

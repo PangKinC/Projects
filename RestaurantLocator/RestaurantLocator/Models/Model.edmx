@@ -5,6 +5,14 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="RestaurantDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Rate">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Restaurant_ID" Type="int" Nullable="false" />
+          <Property Name="Review" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="Restaurants">
           <Key>
             <PropertyRef Name="ID" />
@@ -21,14 +29,40 @@
           <Property Name="Latitude" Type="decimal" Precision="10" Scale="7" Nullable="false" />
           <Property Name="Longitude" Type="decimal" Precision="10" Scale="7" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Rate_Restaurants">
+          <End Role="Restaurants" Type="Self.Restaurants" Multiplicity="1" />
+          <End Role="Rate" Type="Self.Rate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurants">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Rate">
+              <PropertyRef Name="Restaurant_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="RestaurantDBModelStoreContainer">
+          <EntitySet Name="Rate" EntityType="Self.Rate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Restaurants" EntityType="Self.Restaurants" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Rate_Restaurants" Association="Self.FK_Rate_Restaurants">
+            <End Role="Restaurants" EntitySet="Restaurants" />
+            <End Role="Rate" EntitySet="Rate" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="RestaurantDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Rate">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Restaurant_ID" Type="Int32" Nullable="false" />
+          <Property Name="Review" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Restaurant" Relationship="Self.FK_Rate_Restaurants" FromRole="Rate" ToRole="Restaurants" />
+        </EntityType>
         <EntityType Name="Restaurant">
           <Key>
             <PropertyRef Name="ID" />
@@ -44,9 +78,27 @@
           <Property Name="Price_Range" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Latitude" Type="Decimal" Precision="10" Scale="7" Nullable="false" />
           <Property Name="Longitude" Type="Decimal" Precision="10" Scale="7" Nullable="false" />
+          <NavigationProperty Name="Rates" Relationship="Self.FK_Rate_Restaurants" FromRole="Restaurants" ToRole="Rate" />
         </EntityType>
+        <Association Name="FK_Rate_Restaurants">
+          <End Role="Restaurants" Type="Self.Restaurant" Multiplicity="1" />
+          <End Role="Rate" Type="Self.Rate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurants">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Rate">
+              <PropertyRef Name="Restaurant_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="RestaurantDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Rates" EntityType="Self.Rate" />
           <EntitySet Name="Restaurants" EntityType="Self.Restaurant" />
+          <AssociationSet Name="FK_Rate_Restaurants" Association="Self.FK_Rate_Restaurants">
+            <End Role="Restaurants" EntitySet="Restaurants" />
+            <End Role="Rate" EntitySet="Rates" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -54,6 +106,15 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="RestaurantDBModelStoreContainer" CdmEntityContainer="RestaurantDBEntities">
+          <EntitySetMapping Name="Rates">
+            <EntityTypeMapping TypeName="RestaurantDBModel.Rate">
+              <MappingFragment StoreEntitySet="Rate">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Restaurant_ID" ColumnName="Restaurant_ID" />
+                <ScalarProperty Name="Review" ColumnName="Review" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Restaurants">
             <EntityTypeMapping TypeName="RestaurantDBModel.Restaurant">
               <MappingFragment StoreEntitySet="Restaurants">

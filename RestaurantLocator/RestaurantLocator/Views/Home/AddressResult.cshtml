@@ -47,7 +47,7 @@
                         content: ""<div class=\""infoWindow\""> <b>{0}</b> <br/> {1}<br/> {2}<br/> {3}<br/> {4} </div>""
 
                         }}",
-                        restaurant.Name,
+                        restaurant.ID,
                         restaurant.Address,
                         restaurant.City,
                         restaurant.Country,
@@ -70,7 +70,9 @@
                  @foreach (var restaurant in Model)
                  {
                         <tr>
-                            <td> @restaurant.Name </td>
+           
+                            <td> 
+                            @Html.ActionLink(restaurant.ID.ToString(), "CreateReview", new { id = restaurant.ID }) </td>
                             <td> @restaurant.DisplayAddressDistance </td>
                             <td>
                                 @restaurant.Address <br />

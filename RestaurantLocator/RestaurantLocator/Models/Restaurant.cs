@@ -14,6 +14,12 @@ namespace RestaurantLocator.Models
     
     public partial class Restaurant
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Restaurant()
+        {
+            this.Rates = new HashSet<Rate>();
+        }
+    
         public int ID { get; set; }
         public string Name { get; set; }
         public string Cuisine { get; set; }
@@ -25,5 +31,8 @@ namespace RestaurantLocator.Models
         public string Price_Range { get; set; }
         public decimal Latitude { get; set; }
         public decimal Longitude { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Rate> Rates { get; set; }
     }
 }

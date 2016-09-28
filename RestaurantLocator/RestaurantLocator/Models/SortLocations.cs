@@ -10,6 +10,7 @@ namespace RestaurantLocator.Models
         public decimal AddressLatitude { get; set; }
         public decimal AddressLongitude { get; set; }
 
+
         public decimal AddressDistance
         {
             get

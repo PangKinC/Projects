@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<RestaurantLocator.Models.Restaurant>
 
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutPage.cshtml";
@@ -58,6 +59,7 @@
 
     @foreach (var restaurant in Model)
     {
+        @Html.HiddenFor(model => restaurant.ID)
         <tr>
             <td> @restaurant.Name </td>
             <td> @restaurant.Cuisine </td>
@@ -72,6 +74,7 @@
                 @Html.ActionLink("Restaurant Details", "ReadData", new { id = restaurant.ID }) <br/>
                 @Html.ActionLink("Update Restaurant Details", "UpdateData", new { id = restaurant.ID }) <br/>
                 @Html.ActionLink("Delete Restaurant", "DeleteData", new { id = restaurant.ID }) <br/>
+                @Html.ActionLink("Test", "CreateReview", new { id = restaurant.ID }) <br />
             </td>
         </tr>
     }

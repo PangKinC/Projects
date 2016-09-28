@@ -67,6 +67,7 @@ namespace RestaurantLocator.Controllers
                             //select r;
                             select new SortLocations()
                             {
+                                ID = r.ID,
                                 Name = r.Name,
                                 Cuisine = r.Cuisine,
                                 Address = r.Address,
@@ -139,6 +140,14 @@ namespace RestaurantLocator.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public ActionResult CreateReview(int? id)
+        {
+            var rate = db.Rates.Where(r => r.Restaurant_ID == id);
+            Restaurant res = db.Restaurants.Find(id);
+            return View(res);
+        }
+
     }
 
 }

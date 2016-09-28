@@ -1,6 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="RestaurantDBModelStoreContainer" CdmEntityContainer="RestaurantDBEntities">
+    <EntitySetMapping Name="Rates">
+      <EntityTypeMapping TypeName="RestaurantDBModel.Rate">
+        <MappingFragment StoreEntitySet="Rate">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Restaurant_ID" ColumnName="Restaurant_ID" />
+          <ScalarProperty Name="Review" ColumnName="Review" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Restaurants">
       <EntityTypeMapping TypeName="RestaurantDBModel.Restaurant">
         <MappingFragment StoreEntitySet="Restaurants">
@@ -15,15 +24,6 @@
           <ScalarProperty Name="Price_Range" ColumnName="Price_Range" />
           <ScalarProperty Name="Latitude" ColumnName="Latitude" />
           <ScalarProperty Name="Longitude" ColumnName="Longitude" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Rates">
-      <EntityTypeMapping TypeName="RestaurantDBModel.Rate">
-        <MappingFragment StoreEntitySet="Rate">
-          <ScalarProperty Name="Review" ColumnName="Review" />
-          <ScalarProperty Name="Restaurant_ID" ColumnName="Restaurant_ID" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

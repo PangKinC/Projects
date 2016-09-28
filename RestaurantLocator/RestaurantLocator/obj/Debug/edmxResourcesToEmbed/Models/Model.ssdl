@@ -5,7 +5,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Restaurant_ID" Type="int" />
+    <Property Name="Restaurant_ID" Type="int" Nullable="false" />
     <Property Name="Review" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="Restaurants">
@@ -25,7 +25,7 @@
     <Property Name="Longitude" Type="decimal" Precision="10" Scale="7" Nullable="false" />
   </EntityType>
   <Association Name="FK_Rate_Restaurants">
-    <End Role="Restaurants" Type="Self.Restaurants" Multiplicity="0..1" />
+    <End Role="Restaurants" Type="Self.Restaurants" Multiplicity="1" />
     <End Role="Rate" Type="Self.Rate" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Restaurants">
