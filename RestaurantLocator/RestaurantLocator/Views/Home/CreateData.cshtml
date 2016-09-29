@@ -2,16 +2,14 @@
 
 @{
     ViewBag.Title = "AddData";
-    Layout = "~/Views/Shared/_LayoutPage.cshtml";
 }
 
-<h2> Add New Restaurant </h2>
+<h3> Add New Restaurant </h3>
 
 @using (Html.BeginForm())
 {
+    <hr/>
     <div class="form-horizontal">
-        <h4> Restaurant </h4>
-        <hr/>
         @Html.ValidationSummary(true, "", new { @class="text-danger" })
 
         <div class="form-group">
@@ -28,7 +26,7 @@
                 @Html.EditorFor(model => model.Cuisine, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Cuisine, "", new { @class = "text-danger" })
             </div>
-        </div>1
+        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })

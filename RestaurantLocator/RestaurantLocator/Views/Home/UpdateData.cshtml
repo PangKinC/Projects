@@ -2,16 +2,15 @@
 
 @{
     ViewBag.Title = "UpdateData";
-    Layout = "~/Views/Shared/_LayoutPage.cshtml";
 }
 
-<h2>Edit Restaurant Details</h2>
+<h3>Edit Restaurant Details</h3>
 
 @using (Html.BeginForm())
 {
+    <hr />
     <div class="form-horizontal">
-        <h4> Restaurant </h4>
-        <hr />
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="form-group">

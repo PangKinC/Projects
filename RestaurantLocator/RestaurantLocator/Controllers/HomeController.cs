@@ -141,12 +141,25 @@ namespace RestaurantLocator.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult CreateReview(int? id)
+        public ActionResult CreateReview()
         {
-            var rate = db.Rates.Where(r => r.Restaurant_ID == id);
-            Restaurant res = db.Restaurants.Find(id);
-            return View(res);
+            /*var rate = db.Rates.Where(r => r.Restaurant_ID == id);
+
+            return View(rate);*/
+            return View();
         }
+
+        /*[HttpPost]
+        public ActionResult CreateReview(Rate rate)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Rates.Add(rate);
+                db.SaveChanges();
+                return RedirectToAction("CreateReview");
+            }
+            else { return View(rate); }
+        }*/
 
     }
 

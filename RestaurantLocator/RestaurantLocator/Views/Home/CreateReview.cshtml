@@ -1,18 +1,29 @@
-﻿@model RestaurantLocator.Models.Restaurant
+﻿@* @model RestaurantLocator.Models.Restaurant *@
+@model Tuple<RestaurantLocator.Models.Restaurant, RestaurantLocator.Models.Rate>
 
 @{
     ViewBag.Title = "CreateReview";
-    Layout = "~/Views/Shared/_LayoutPage.cshtml";
 }
 
-<h2> Write a Review </h2>
+<h3> Write a review @Model.Item1.Name</h3>
 
-<div>
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        @Html.LabelFor(model => model.Item2.Review, htmlAttributes: new { @style = "width: 500px, height: 5000px;" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Item2.Review, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Item2.Review, "", new { @class = "text-danger" })
+        </div>
+    </div>
+}
+
+@*<div>
     <h4> Restaurant </h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => Model)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Name)
@@ -68,5 +79,7 @@
         </dd>
 
     </dl>
-</div>
+</div>*@
+
+<br/>
 @Html.ActionLink("Back to Index", "Index")

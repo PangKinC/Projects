@@ -2,10 +2,9 @@
 
 @{
     ViewBag.Title = "AddressResult";
-    Layout = "~/Views/Shared/_LayoutPage.cshtml";
 }
 
-<h2>Restaurants near @Request.QueryString["Address"]!</h2>
+<h3>Restaurants near @Request.QueryString["Address"]!</h3>
 
 <p>
     @Html.ActionLink("Search another location", "Index")
@@ -33,7 +32,7 @@
                 {
                     location.Add(String.Format(
                         @"{{
-                        title: ""Restaurant #{0}"",
+                        title: ""{0}"",
                         position: new google.maps.LatLng({1}, {2})
                     }}",
                         restaurant.Name,
@@ -44,10 +43,9 @@
 
                     window.Add(String.Format(
                         @"{{
-                        content: ""<div class=\""infoWindow\""> <b>{0}</b> <br/> {1}<br/> {2}<br/> {3}<br/> {4} </div>""
-
+                            content: ""<div class=\""windowData\""> <b>{0}</b> <br/> {1}<br/> {2}<br/> {3}<br/> {4}<br/> <a href=\""http://maps.google.com/maps?f=d&source=s_d&saddr={5}&daddr={6}\""> Directions </a> </div>""
                         }}",
-                        restaurant.ID,
+                        restaurant.Name,
                         restaurant.Address,
                         restaurant.City,
                         restaurant.Country,
@@ -69,10 +67,9 @@
      
                  @foreach (var restaurant in Model)
                  {
-                        <tr>
-           
+                        <tr>    
                             <td> 
-                            @Html.ActionLink(restaurant.ID.ToString(), "CreateReview", new { id = restaurant.ID }) </td>
+                            @Html.ActionLink(restaurant.Name, "ReadData", new { id = restaurant.ID }) </td>
                             <td> @restaurant.DisplayAddressDistance </td>
                             <td>
                                 @restaurant.Address <br />
