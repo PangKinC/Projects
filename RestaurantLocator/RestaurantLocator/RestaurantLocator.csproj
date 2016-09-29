@@ -234,8 +234,12 @@
     <Content Include="Views\Home\UpdateData.cshtml" />
     <Content Include="Views\Home\DeleteData.cshtml" />
     <Content Include="Views\Home\AddressResult.cshtml" />
-    <Content Include="Views\Home\CreateReview.cshtml" />
+    <Content Include="Views\Home\RCReview.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Home\ReviewList.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Home\DeleteReview.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

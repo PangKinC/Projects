@@ -9,6 +9,7 @@ namespace RestaurantLocator.Models
     {
         public Rate rate { get; set; }
         public Restaurant res { get; set; }
-
+        public IList<Restaurant> allRes { get; set; }
+        public IList<Rate> allRate { get;  set;}
     }
 }

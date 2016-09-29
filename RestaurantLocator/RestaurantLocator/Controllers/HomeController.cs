@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace RestaurantLocator.Controllers
 {
@@ -17,26 +18,29 @@ namespace RestaurantLocator.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            var restaurants = from m in db.Restaurants
-                              select m;
+            RestaurantView resView = new RestaurantView();
+            resView.allRes = (from r in db.Restaurants select r).ToList();
+            resView.allRate = (from t in db.Rates select t).ToList(); 
 
-            return View(restaurants);
+            return View(resView);
+        }
+
+        public ActionResult Search()
+        {
+            return View();
         }
 
         [HttpPost]
-        public ActionResult Index(string address)
+        public ActionResult Search(string address)
         {
-            var restaurants = from m in db.Restaurants
-                              select m;
-
-            if (string.IsNullOrEmpty(address)) { return View(restaurants); }
+            if (string.IsNullOrEmpty(address)) { return View(); }
 
             var matchFound = GoogleMapsAPIHelpersCS.GetGeocodingSearchResults(address);
             var matchCount = matchFound.Elements("result").Count();
 
             if (matchCount == 0) {
                 ViewData["NoMatch"] = true;
-                return View(restaurants);
+                return View();
             }
             else if (matchCount == 1) {
                 return RedirectToAction("AddressResult", new { Address = matchFound.Element("result").Element("formatted_address").Value });
@@ -48,7 +52,7 @@ namespace RestaurantLocator.Controllers
                                 select formatted_address;
                 ViewData["MatchResults"] = matchList;
 
-                return View(restaurants);
+                return View();
             }
 
         }
@@ -105,11 +109,6 @@ namespace RestaurantLocator.Controllers
         public ActionResult ReadData(int? id)
         {
             Restaurant res = db.Restaurants.Find(id);
-
-            if (RedirectToAction("CreateReview").Equals(true)) {
-                TempData["ResID"] = id;
-            }
-
             return View(res);
         }
 
@@ -141,13 +140,17 @@ namespace RestaurantLocator.Controllers
         [HttpPost, ActionName("DeleteData")]
         public ActionResult DeleteConfirmation(int? id)
         {
+            Rate rate = db.Rates.Find(id);
+            db.Rates.Remove(rate);
+
             Restaurant res = db.Restaurants.Find(id);
             db.Restaurants.Remove(res);
+
             db.SaveChanges();
             return RedirectToAction("Index");
         }
 
-        public ActionResult CreateReview(int id)
+        public ActionResult RCReview(int id)
         {
             /*var rate = db.Rates.Where(r => r.Restaurant_ID == id);
             R
@@ -161,17 +164,76 @@ namespace RestaurantLocator.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateReview(Rate rate)
+        public ActionResult RCReview(RestaurantView rv)
         {
             if (ModelState.IsValid)
             {
+                Rate rate = new Rate();
+                rate.Review = rv.rate.Review;
+                rate.Restaurant_ID = rv.res.ID;
+
                 db.Rates.Add(rate);
                 db.SaveChanges();
-                return RedirectToAction("CreateReview");
+                return RedirectToAction("Index");
             }
-            else { return View(rate); }
+            else { return View(rv); }
+        }
+
+        public ViewResult ReviewList()
+        {
+            return View(db.Rates.ToList());
+        }
+
+        public ActionResult DeleteReview(int? id)
+        {
+            if (id == null) { return new HttpStatusCodeResult(HttpStatusCode.BadRequest); }
+            Rate rate = db.Rates.Find(id);
+            if (rate == null) { return HttpNotFound(); }
+            return View(rate);
+        }
+
+        [HttpPost, ActionName("DeleteReview")]
+        public ActionResult DeleteReviewC(int? id)
+        {
+            Rate rate = db.Rates.Find(id);
+            db.Rates.Remove(rate);
+
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        
+        public ActionResult Login()
+        {
+            return View("Login");
+        }
+
+        [HttpPost]
+        public ActionResult Login(Account acct)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Error = "Form is not valid; please review and try again.";
+                return View("Login");
+            }
+
+            bool validEmail = db.Accounts.Any(e => e.Email_Address == acct.Email_Address);
+            bool validPassword = db.Accounts.Any(e => e.Password == acct.Password);
+
+            if ((validEmail == true) && (validPassword == true))
+            {
+                FormsAuthentication.RedirectFromLoginPage(acct.Email_Address, true);
+            }
+
+            ViewBag.Error = "Credentials invalid. Please try again.";
+            return View("Login");
+        }
+
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login");
         }
 
     }
-
 }

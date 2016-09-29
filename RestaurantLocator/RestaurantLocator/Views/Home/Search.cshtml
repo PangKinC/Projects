@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<p class="centerAlign"> <h3> Search Page </h3> </p>
+<br />
+
+<p> Enter your address, country or postcode to locate nearby restaurants. </p>
+
+@using (Html.BeginForm())
+{
+    <b> Details: </b>
+    @Html.TextBox("address");
+    <input type="submit" value="Search" />
+    <br />
+    <i> e.g. 11 Palmerston Road, London, E17 6PF </i>
+
+    if (ViewData["NoMatch"] != null)
+    {
+        <div class="input-validation-error">
+            Address was not found, please try again.
+        </div>
+    }
+
+    var similarMatches = ViewData["MatchResults"] as IEnumerable<string>;
+
+    if (similarMatches != null)
+    {
+        <div style="padding-left: 25px; margin-top: 10px;">
+            <b> Following matches found ... </b>
+            <ol>
+                @foreach (var match in similarMatches)
+                {
+                    <li>
+                        @Html.ActionLink(match, "AddressResults", new { Address = match })
+                    </li>
+                }
+            </ol>
+        </div>
+    }
+}
+
+<br />

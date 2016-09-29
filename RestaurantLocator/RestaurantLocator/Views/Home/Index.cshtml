@@ -1,66 +1,28 @@
-﻿@model IEnumerable<RestaurantLocator.Models.Restaurant>
+﻿@model RestaurantLocator.Models.RestaurantView
 
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h3> Search Page </h3>
-<br/>
+<h3> <p class="centerAlign"> Administrator Tools </p> </h3>
 
-<p> Enter your address, country or postcode to locate nearby restaurants. </p>
-
-@using (Html.BeginForm())
-{
-    <b> Details: </b>
-    @Html.TextBox("address");
-    <input type="submit" value="Search" />
-    <br />
-    <i> e.g. 11 Palmerston Road, London, E17 6PF </i>
-
-        if (ViewData["NoMatch"] != null)
-        {
-            <div class="input-validation-error">
-                Address was not found, please try again.        
-            </div>
-        }
-
-        var similarMatches = ViewData["MatchResults"] as IEnumerable<string>;
-
-        if (similarMatches != null) {
-        <div style="padding-left: 25px; margin-top: 10px;">
-            <b> Following matches found ... </b>
-            <ol>
-                @foreach (var match in similarMatches)
-                {
-                    <li> 
-                        @Html.ActionLink(match, "AddressResults", new { Address = match }) 
-                    </li>
-                }
-            </ol>
-        </div>
-       }
-    }
-
-    <br/>
-    <p>
-        @Html.ActionLink("Add New Restaurant", "CreateData")
-    </p>
+<h4> List of Restaurants </h4>
+<br />
+<p class="rightAlign"> @Html.ActionLink("Add New Restaurant", "CreateData") </p>
     
     <table cellspacing="0" cellpadding="5" rules="all" class="searchResults">
         <tr>
-            <th> Restaurant Name </th>
-            <th> Cuisine </th>
+            <th> Name </th>
             <th> Address </th>
             <th> Phone Number </th>
             <th> Read / Update / Delete </th>
         </tr>
 
-    @foreach (var restaurant in Model)
+    @foreach (var restaurant in Model.allRes)
     {
         <tr>
             <td> @restaurant.Name </td>
-            <td> @restaurant.Cuisine </td>
             <td>
                 @restaurant.Address <br/>
                 @restaurant.City <br/>
@@ -72,11 +34,31 @@
                 @Html.ActionLink("Restaurant Details", "ReadData", new { id = restaurant.ID }) <br/>
                 @Html.ActionLink("Update Restaurant Details", "UpdateData", new { id = restaurant.ID }) <br/>
                 @Html.ActionLink("Delete Restaurant", "DeleteData", new { id = restaurant.ID }) <br/>
-                @Html.ActionLink("Test", "CreateReview", new { id = restaurant.ID }) <br />
+                @Html.ActionLink("Review Restaurant", "RCReview", new { id = restaurant.ID }) <br />
             </td>
         </tr>
     }
     </table>
 
+<h4> List of Reviews </h4>
+<br />
+<table cellspacing="0" cellpadding="5" rules="all" class="searchResults">
+    <tr>
+        <th> ID </th>
+        <th> Review </th>
+        <th> Create / Read / Update </th>
+    </tr>
 
+    @foreach (var review in Model.allRate)
+    {
+        <tr>
+            <td> @review.ID </td>
+            <td> @review.Review </td>
+            <td>
+                @Html.ActionLink("Review Restaurant", "RCReview", new { id = review.ID }) <br />
+                @Html.ActionLink("Delete Review", "DeleteReview", new { id = review.ID }) <br />
+            </td>
+        </tr>
+    }
+</table>
 
