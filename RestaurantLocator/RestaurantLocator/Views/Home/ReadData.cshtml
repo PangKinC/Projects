@@ -6,7 +6,7 @@
 
 <h3>Restaurant Details</h3>
 
-<p> @Html.ActionLink("Review this Restaurant", "CreateReview") </p>
+<p class="centerAlign"> @Html.ActionLink("Review this Restaurant", "CreateReview", new { id = Model.ID }) </p>
 
 <div>
     <hr />
@@ -19,7 +19,8 @@
             @Html.HiddenFor(model => model.ID)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.Hidden("ResName", Model.Name)
+            @Html.DisplayFor(model => model.Name)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Name)

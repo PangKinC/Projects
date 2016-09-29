@@ -101,9 +101,15 @@ namespace RestaurantLocator.Controllers
             }
             else { return View(res); }
         }
+
         public ActionResult ReadData(int? id)
         {
             Restaurant res = db.Restaurants.Find(id);
+
+            if (RedirectToAction("CreateReview").Equals(true)) {
+                TempData["ResID"] = id;
+            }
+
             return View(res);
         }
 
@@ -141,15 +147,20 @@ namespace RestaurantLocator.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult CreateReview()
+        public ActionResult CreateReview(int id)
         {
             /*var rate = db.Rates.Where(r => r.Restaurant_ID == id);
-
-            return View(rate);*/
-            return View();
+            R
+            return View(rate);*/       
+            Rate rate = new Rate();
+            Restaurant res = db.Restaurants.Find(id);
+            RestaurantView rv = new RestaurantView();
+            rv.rate = rate;
+            rv.res = res;
+            return View(rv);
         }
 
-        /*[HttpPost]
+        [HttpPost]
         public ActionResult CreateReview(Rate rate)
         {
             if (ModelState.IsValid)
@@ -159,7 +170,7 @@ namespace RestaurantLocator.Controllers
                 return RedirectToAction("CreateReview");
             }
             else { return View(rate); }
-        }*/
+        }
 
     }
 

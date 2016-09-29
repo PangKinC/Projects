@@ -58,7 +58,6 @@
 
     @foreach (var restaurant in Model)
     {
-        @Html.HiddenFor(model => restaurant.ID)
         <tr>
             <td> @restaurant.Name </td>
             <td> @restaurant.Cuisine </td>
