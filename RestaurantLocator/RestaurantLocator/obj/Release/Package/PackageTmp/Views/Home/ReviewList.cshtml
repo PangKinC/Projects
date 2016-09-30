@@ -1,0 +1,24 @@
+﻿@model IEnumerable<RestaurantLocator.Models.Rate>
+
+<table cellspacing="0" cellpadding="5" rules="all" class="searchResults changeTable">
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            All Reviews Listing
+        </th>
+    </tr>
+
+    @foreach (var review in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(r => review.Restaurant_ID)
+            </td>
+            <td class="changeTable">
+                @Html.DisplayFor(r => review.Review)
+            </td>
+        </tr>
+    }
+</table>

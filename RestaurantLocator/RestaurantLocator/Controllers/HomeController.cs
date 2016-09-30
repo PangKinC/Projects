@@ -141,7 +141,7 @@ namespace RestaurantLocator.Controllers
         public ActionResult DeleteConfirmation(int? id)
         {
             Rate rate = db.Rates.Find(id);
-            db.Rates.Remove(rate);
+            if (rate != null) { db.Rates.Remove(rate); }
 
             Restaurant res = db.Restaurants.Find(id);
             db.Restaurants.Remove(res);

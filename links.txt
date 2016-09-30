@@ -3,3 +3,5 @@ http://www.4guysfromrolla.com/articles/051910-1.aspx
 http://www.dotnetfunda.com/articles/show/2828/developing-a-star-rating-in-aspnet-mvc
 https://demos.devexpress.com/MVCxMultiUseExtensionsDemos/RatingControl/Voting
 http://codereview.stackexchange.com/questions/51331/simple-authentication-in-asp-net-mvc-5
+
+http://blog.falafel.com/dead-simple-aspnet-mvc-authentication/

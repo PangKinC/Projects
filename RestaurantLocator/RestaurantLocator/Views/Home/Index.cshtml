@@ -52,7 +52,7 @@
     @foreach (var review in Model.allRate)
     {
         <tr>
-            <td> @review.ID </td>
+            <td> @review.Restaurant_ID </td>
             <td> @review.Review </td>
             <td>
                 @Html.ActionLink("Review Restaurant", "RCReview", new { id = review.ID }) <br />

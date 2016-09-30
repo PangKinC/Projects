@@ -1,0 +1,54 @@
+﻿.skm_BookReviewContainer
+{
+    text-align: center;
+}
+
+.skm_BookReview
+{
+}
+
+.skm_BookReviewByline
+{
+    font-size: 85%;
+}
+
+.skm_EditRow
+{
+    background-color: #DDD;
+}
+
+.skm_RowLabel
+{
+    font-weight: bold;
+    text-align: right;
+}
+
+pre b 
+{
+    color: Red;
+}
+
+table.searchResults {
+    width: 95%;
+    border: 1px solid black;
+}
+
+table.searchResults th {
+    background-color: #fee;
+}
+
+#noResults {
+    padding-left: 25px;
+    color: Red;
+}
+
+.map-area {
+    width: 95%; 
+    height: 400px; 
+    margin-bottom: 15px;
+    border: solid 1px #333;
+}
+
+.infoWindow {
+    line-height: normal;
+}

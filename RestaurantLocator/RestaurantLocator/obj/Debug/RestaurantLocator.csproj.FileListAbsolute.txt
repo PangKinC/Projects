@@ -45,7 +45,6 @@ C:\Users\Suijin\Documents\GitHub\Projects\RestaurantLocator\RestaurantLocator\bi
 C:\Users\Suijin\Documents\GitHub\Projects\RestaurantLocator\RestaurantLocator\bin\System.Web.Webpages.Razor.xml
 C:\Users\Suijin\Documents\GitHub\Projects\RestaurantLocator\RestaurantLocator\bin\System.Web.Helpers.xml
 C:\Users\Suijin\Documents\GitHub\Projects\RestaurantLocator\RestaurantLocator\bin\System.Web.Mvc.xml
-C:\Users\Suijin\Documents\GitHub\Projects\RestaurantLocator\RestaurantLocator\obj\Debug\RestaurantLocator.csprojResolveAssemblyReference.cache
 C:\Users\Suijin\Documents\GitHub\Projects\RestaurantLocator\RestaurantLocator\obj\Debug\RestaurantLocator.dll
 C:\Users\Suijin\Documents\GitHub\Projects\RestaurantLocator\RestaurantLocator\obj\Debug\RestaurantLocator.pdb
 C:\Users\student\Kin Pang\GitHub\Projects\RestaurantLocator\RestaurantLocator\bin\ApplicationInsights.config
