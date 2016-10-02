@@ -179,9 +179,18 @@ namespace RestaurantLocator.Controllers
             else { return View(rv); }
         }
 
-        public ViewResult ReviewList()
+        public PartialViewResult ReviewList(int id)
         {
-            return View(db.Rates.ToList());
+            /*SpecificReview reviews = new SpecificReview { checkReview = db.Rates.Where(r => r.Restaurant_ID == id).OrderBy(p => p.ID) };
+
+            return PartialView(reviews);*/
+
+            //return PartialView(db.Rates.ToList());
+
+           return PartialView(db.Rates.Where
+                (r => r.Restaurant_ID == id)
+                .OrderByDescending(p => p.ID).
+                ToList());
         }
 
         public ActionResult DeleteReview(int? id)

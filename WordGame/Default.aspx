@@ -127,7 +127,7 @@
  </script>
 </head>
 <body style="height: 423px">
-
+    <h2>Word Guessing Game</h2>
     <form id="form1" runat="server">
     <asp:ScriptManager id="scriptManager" runat="server" />
     <div style="height: 606px">

@@ -22,7 +22,6 @@ namespace RestaurantLocator.Models
                         Math.Pow(Convert.ToDouble(this.Longitude - this.AddressLongitude), 2.0)
                     ) * 62.1371192
                 );
-
             }
         }
 

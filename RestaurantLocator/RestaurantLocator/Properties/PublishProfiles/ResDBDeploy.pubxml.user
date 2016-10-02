@@ -11,25 +11,25 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="ApplicationInsights.config">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/25/2016 21:21:29</publishTime>
     </File>
     <File Include="bin/ApplicationInsights.config">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/25/2016 21:21:29</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/30/2016 07:42:27</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/30/2016 07:42:27</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
-      <publishTime>03/11/2015 16:43:42</publishTime>
+      <publishTime>11/03/2015 16:43:42</publishTime>
     </File>
     <File Include="bin/EntityFramework.SqlServer.dll">
-      <publishTime>03/11/2015 16:43:42</publishTime>
+      <publishTime>11/03/2015 16:43:42</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.Agent.Intercept.dll">
-      <publishTime>07/12/2015 19:04:38</publishTime>
+      <publishTime>12/07/2015 19:04:38</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.DependencyCollector.dll">
       <publishTime>06/06/2016 15:40:16</publishTime>
@@ -50,208 +50,208 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/06/2016 10:42:24</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>06/15/2015 02:06:24</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>04/23/2012 15:23:58</publishTime>
     </File>
     <File Include="bin/RestaurantLocator.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/30/2016 01:26:48</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>06/18/2015 20:19:46</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.Build.Tasks.CodeAnalysis.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>06/18/2015 20:19:46</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>06/18/2015 20:19:46</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>06/18/2015 20:19:44</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.VisualBasic.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>06/18/2015 20:19:46</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CSharp.Core.targets">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>06/18/2015 20:19:46</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.VisualBasic.Core.targets">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>06/18/2015 20:19:46</publishTime>
     </File>
     <File Include="bin/roslyn/System.Collections.Immutable.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>06/18/2015 20:19:46</publishTime>
     </File>
     <File Include="bin/roslyn/System.Reflection.Metadata.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>06/18/2015 20:19:46</publishTime>
     </File>
     <File Include="bin/roslyn/vbc.exe">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>06/18/2015 20:19:46</publishTime>
     </File>
     <File Include="bin/roslyn/VBCSCompiler.exe">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>06/18/2015 20:19:46</publishTime>
     </File>
     <File Include="bin/roslyn/VBCSCompiler.exe.config">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>06/18/2015 20:19:46</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>01/28/2015 03:04:30</publishTime>
     </File>
     <File Include="bin/System.Web.Mvc.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>01/28/2015 03:02:18</publishTime>
     </File>
     <File Include="bin/System.Web.Razor.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>01/28/2015 03:02:32</publishTime>
     </File>
     <File Include="bin/System.Web.Webpages.Deployment.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>01/28/2015 03:04:30</publishTime>
     </File>
     <File Include="bin/System.Web.Webpages.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>01/28/2015 03:04:30</publishTime>
     </File>
     <File Include="bin/System.Web.Webpages.Razor.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>01/28/2015 03:04:30</publishTime>
     </File>
     <File Include="Content/bootstrap-theme.css">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/25/2016 23:16:07</publishTime>
     </File>
     <File Include="Content/bootstrap-theme.css.map">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/25/2016 23:16:07</publishTime>
     </File>
     <File Include="Content/bootstrap-theme.min.css">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/25/2016 23:16:07</publishTime>
     </File>
     <File Include="Content/bootstrap-theme.min.css.map">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/25/2016 23:16:07</publishTime>
     </File>
     <File Include="Content/bootstrap.css">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/25/2016 23:16:07</publishTime>
     </File>
     <File Include="Content/bootstrap.css.map">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/25/2016 23:16:07</publishTime>
     </File>
     <File Include="Content/bootstrap.min.css">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/25/2016 23:16:07</publishTime>
     </File>
     <File Include="Content/bootstrap.min.css.map">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/25/2016 23:16:07</publishTime>
     </File>
     <File Include="Content/CustomStyles.css">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/25/2016 23:18:33</publishTime>
     </File>
     <File Include="Content/sinorcaish-screen.css">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/25/2016 23:18:31</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/30/2016 00:11:21</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.eot">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/25/2016 23:16:07</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.svg">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/25/2016 23:16:07</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.ttf">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/25/2016 23:16:07</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.woff">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/25/2016 23:16:07</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.woff2">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/25/2016 23:16:07</publishTime>
     </File>
     <File Include="Models/RestaurantDB.edmx.diagram">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/29/2016 18:44:29</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/28/2016 22:47:52</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/30/2016 07:42:23</publishTime>
     </File>
     <File Include="scripts/ai.0.22.19-build00125.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/25/2016 21:21:30</publishTime>
     </File>
     <File Include="scripts/ai.0.22.19-build00125.min.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/25/2016 21:21:30</publishTime>
     </File>
     <File Include="scripts/bootstrap.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/25/2016 23:16:07</publishTime>
     </File>
     <File Include="scripts/bootstrap.min.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/25/2016 23:16:07</publishTime>
     </File>
     <File Include="scripts/GoogleMapHelpers.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/25/2016 23:19:40</publishTime>
     </File>
     <File Include="scripts/jquery-1.9.1.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/25/2016 23:16:04</publishTime>
     </File>
     <File Include="scripts/jquery-1.9.1.min.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/25/2016 23:16:04</publishTime>
     </File>
     <File Include="scripts/jquery-1.9.1.min.map">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/25/2016 23:16:03</publishTime>
     </File>
     <File Include="scripts/jquery.validate.js">
-      <publishTime>02/09/2016 18:20:02</publishTime>
+      <publishTime>09/02/2016 18:20:02</publishTime>
     </File>
     <File Include="scripts/jquery.validate.min.js">
-      <publishTime>02/09/2016 18:20:02</publishTime>
+      <publishTime>09/02/2016 18:20:02</publishTime>
     </File>
     <File Include="scripts/jquery.validate.unobtrusive.js">
-      <publishTime>02/09/2016 18:20:02</publishTime>
+      <publishTime>09/02/2016 18:20:02</publishTime>
     </File>
     <File Include="scripts/jquery.validate.unobtrusive.min.js">
-      <publishTime>02/09/2016 18:20:02</publishTime>
+      <publishTime>09/02/2016 18:20:02</publishTime>
     </File>
     <File Include="scripts/modernizr-2.6.2.js">
-      <publishTime>02/09/2016 18:20:02</publishTime>
+      <publishTime>09/02/2016 18:20:02</publishTime>
     </File>
     <File Include="Views/Home/AddressResult.cshtml">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/30/2016 00:08:53</publishTime>
     </File>
     <File Include="Views/Home/CreateData.cshtml">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/29/2016 00:09:12</publishTime>
     </File>
     <File Include="Views/Home/DeleteData.cshtml">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/29/2016 00:08:06</publishTime>
     </File>
     <File Include="Views/Home/DeleteReview.cshtml">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/30/2016 00:51:01</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/30/2016 07:35:07</publishTime>
     </File>
     <File Include="Views/Home/Login.cshtml">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/29/2016 22:42:29</publishTime>
     </File>
     <File Include="Views/Home/RCReview.cshtml">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/29/2016 21:04:11</publishTime>
     </File>
     <File Include="Views/Home/ReadData.cshtml">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/29/2016 19:22:57</publishTime>
     </File>
     <File Include="Views/Home/ReviewList.cshtml">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/29/2016 22:01:40</publishTime>
     </File>
     <File Include="Views/Home/Search.cshtml">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/30/2016 00:50:56</publishTime>
     </File>
     <File Include="Views/Home/UpdateData.cshtml">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/29/2016 00:06:22</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutPage.cshtml">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/29/2016 23:14:11</publishTime>
     </File>
     <File Include="Views/web.config">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/28/2016 23:20:02</publishTime>
     </File>
     <File Include="Views/_ViewStart.cshtml">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/28/2016 22:51:01</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/30/2016 07:36:15</publishTime>
     </File>
   </ItemGroup>
 </Project>
