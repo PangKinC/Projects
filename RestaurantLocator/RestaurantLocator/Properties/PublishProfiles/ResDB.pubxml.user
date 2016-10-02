@@ -17,10 +17,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/25/2016 21:21:29</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>10/02/2016 17:22:51</publishTime>
+      <publishTime>10/02/2016 19:14:07</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>10/02/2016 17:22:51</publishTime>
+      <publishTime>10/02/2016 19:14:07</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>11/03/2015 16:43:42</publishTime>
@@ -56,7 +56,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/23/2012 15:23:58</publishTime>
     </File>
     <File Include="bin/RestaurantLocator.dll">
-      <publishTime>10/02/2016 17:20:45</publishTime>
+      <publishTime>10/02/2016 19:13:58</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>06/18/2015 20:19:46</publishTime>
@@ -143,7 +143,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/25/2016 23:18:31</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>09/30/2016 00:11:21</publishTime>
+      <publishTime>10/02/2016 19:07:28</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.eot">
       <publishTime>09/25/2016 23:16:07</publishTime>
@@ -167,7 +167,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/28/2016 22:47:52</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>10/02/2016 17:22:47</publishTime>
+      <publishTime>10/02/2016 19:14:03</publishTime>
     </File>
     <File Include="scripts/ai.0.22.19-build00125.js">
       <publishTime>09/25/2016 21:21:30</publishTime>
@@ -218,25 +218,25 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/02/2016 01:30:29</publishTime>
     </File>
     <File Include="Views/Home/DeleteReview.cshtml">
-      <publishTime>10/02/2016 01:33:17</publishTime>
+      <publishTime>10/02/2016 18:03:55</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>10/02/2016 02:40:00</publishTime>
+      <publishTime>10/02/2016 19:12:20</publishTime>
     </File>
     <File Include="Views/Home/Login.cshtml">
       <publishTime>09/29/2016 22:42:29</publishTime>
     </File>
     <File Include="Views/Home/RCReview.cshtml">
-      <publishTime>10/02/2016 01:33:51</publishTime>
+      <publishTime>10/02/2016 19:08:16</publishTime>
     </File>
     <File Include="Views/Home/ReadData.cshtml">
-      <publishTime>10/02/2016 01:29:00</publishTime>
+      <publishTime>10/02/2016 18:01:39</publishTime>
     </File>
     <File Include="Views/Home/ReviewList.cshtml">
       <publishTime>10/02/2016 00:29:44</publishTime>
     </File>
     <File Include="Views/Home/Search.cshtml">
-      <publishTime>10/02/2016 01:40:14</publishTime>
+      <publishTime>10/02/2016 18:05:01</publishTime>
     </File>
     <File Include="Views/Home/UpdateData.cshtml">
       <publishTime>10/02/2016 01:30:58</publishTime>

@@ -13,19 +13,13 @@
 {
     <hr />
     <div class="form-horizontal">
-            <div class="form-group">
-                @Html.LabelFor(model => model.rate.Restaurant_ID, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.res.ID, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.HiddenFor(model => model.res.ID)
-                    @Html.ValidationMessageFor(model => model.rate.Restaurant_ID, "", new { @class = "text-danger" })
-                </div>
-            </div>
+
+            @Html.HiddenFor(model => model.res.ID)
 
             <div class="form-group">
                 @Html.LabelFor(model => model.rate.Review, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.TextAreaFor(model => model.rate.Review, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.TextAreaFor(model => model.rate.Review, new { @cols="60", @rows="8" })
                     @Html.ValidationMessageFor(model => model.rate.Review, "", new { @class = "text-danger" })
                 </div>
             </div>

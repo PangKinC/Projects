@@ -174,12 +174,12 @@ namespace RestaurantLocator.Controllers
 
                 db.Rates.Add(rate);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return View(rv);
             }
             else { return View(rv); }
         }
 
-        public PartialViewResult ReviewList(int id)
+        public ViewResult ReviewList(int id)
         {
             /*SpecificReview reviews = new SpecificReview { checkReview = db.Rates.Where(r => r.Restaurant_ID == id).OrderBy(p => p.ID) };
 
@@ -187,7 +187,7 @@ namespace RestaurantLocator.Controllers
 
             //return PartialView(db.Rates.ToList());
 
-           return PartialView(db.Rates.Where
+           return View(db.Rates.Where
                 (r => r.Restaurant_ID == id)
                 .OrderByDescending(p => p.ID).
                 ToList());

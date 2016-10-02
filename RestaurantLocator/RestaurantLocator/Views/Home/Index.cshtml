@@ -44,7 +44,7 @@
 <table cellspacing="0" cellpadding="5" rules="all" class="searchResults">
     <tr>
         <th> Create / Read / Update </th>
-        <th> ID </th>
+        <th> Name </th>
         <th> Review </th>
     </tr>
 
@@ -55,7 +55,7 @@
                 @Html.ActionLink("Review Restaurant", "RCReview", new { id = review.Restaurant_ID }) <br />
                 @Html.ActionLink("Delete Review", "DeleteReview", new { id = review.ID }) <br />
             </td>
-            <td> @review.Restaurant_ID </td>
+            <td> @review.Restaurant.Name</td>
             <td> @review.Review </td>
         </tr>
     }

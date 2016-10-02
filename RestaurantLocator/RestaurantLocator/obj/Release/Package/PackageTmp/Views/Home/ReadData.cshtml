@@ -12,13 +12,7 @@
     <hr />
     <dl class="dl-horizontal">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ID)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ID)
-            @Html.HiddenFor(model => model.ID)
-        </dd>
+        @Html.HiddenFor(model => model.ID)
 
         <dt>
             @Html.DisplayNameFor(model => model.Name)
