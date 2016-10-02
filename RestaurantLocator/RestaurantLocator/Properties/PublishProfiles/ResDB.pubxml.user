@@ -6,8 +6,8 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAeSb46gcVeECeyAjf6P7RFQAAAAACAAAAAAAQZgAAAAEAACAAAAClXO9UQ+YEFGyY9Zvbekwh7FXaqDt0AeR38WOQNzJBSgAAAAAOgAAAAAIAACAAAAA40uK1au1i64qTAw/k3XniSn+mRQ2o/PEpRzCp7RHjISAAAABBDVEXJgY4rb4WuzClsqwfU1b7304qD6kp5aFvVFW5a0AAAADTOzCnIJP9U5L5r4arx3M41dzq1qPrMh0pRVc5kuN7a/cyT0/9zWlQOzxnGSct5VMy8KRrbMU/0E6FWzzNVkmY</EncryptedPassword>
-    <_PublishTargetUrl>ftp://ftp.Smarterasp.net/kinpang</_PublishTargetUrl>
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAeSb46gcVeECeyAjf6P7RFQAAAAACAAAAAAAQZgAAAAEAACAAAAB0KLpftEq3BQuDwxbU3ZLdYTzN/Ga9PoZLervf5OJliwAAAAAOgAAAAAIAACAAAADzMnaNzQATtd/uDqfP17o6GysxjsFs/0JRXv+bndnORiAAAAB0hGf84u/pDiIwl1gF/clbbwZ91log/vK5xSzyC0MPTUAAAABlzFuh3aImF6ReI7f4Eu/ByCopFWkX+ETVaheledVC2o/AmK+QmE58z/J4doxccz3CScvGN1h+iUf5ahtrB174</EncryptedPassword>
+    <_PublishTargetUrl>ftp://ftp.Smarterasp.net/projects</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="ApplicationInsights.config">
@@ -17,10 +17,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/25/2016 21:21:29</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>09/30/2016 07:42:27</publishTime>
+      <publishTime>10/02/2016 17:22:51</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>09/30/2016 07:42:27</publishTime>
+      <publishTime>10/02/2016 17:22:51</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>11/03/2015 16:43:42</publishTime>
@@ -56,7 +56,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/23/2012 15:23:58</publishTime>
     </File>
     <File Include="bin/RestaurantLocator.dll">
-      <publishTime>09/30/2016 01:26:48</publishTime>
+      <publishTime>10/02/2016 17:20:45</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>06/18/2015 20:19:46</publishTime>
@@ -167,7 +167,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/28/2016 22:47:52</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>09/30/2016 07:42:23</publishTime>
+      <publishTime>10/02/2016 17:22:47</publishTime>
     </File>
     <File Include="scripts/ai.0.22.19-build00125.js">
       <publishTime>09/25/2016 21:21:30</publishTime>
@@ -209,37 +209,37 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/02/2016 18:20:02</publishTime>
     </File>
     <File Include="Views/Home/AddressResult.cshtml">
-      <publishTime>09/30/2016 00:08:53</publishTime>
+      <publishTime>10/02/2016 01:36:32</publishTime>
     </File>
     <File Include="Views/Home/CreateData.cshtml">
-      <publishTime>09/29/2016 00:09:12</publishTime>
+      <publishTime>10/02/2016 01:37:35</publishTime>
     </File>
     <File Include="Views/Home/DeleteData.cshtml">
-      <publishTime>09/29/2016 00:08:06</publishTime>
+      <publishTime>10/02/2016 01:30:29</publishTime>
     </File>
     <File Include="Views/Home/DeleteReview.cshtml">
-      <publishTime>09/30/2016 00:51:01</publishTime>
+      <publishTime>10/02/2016 01:33:17</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>09/30/2016 07:35:07</publishTime>
+      <publishTime>10/02/2016 02:40:00</publishTime>
     </File>
     <File Include="Views/Home/Login.cshtml">
       <publishTime>09/29/2016 22:42:29</publishTime>
     </File>
     <File Include="Views/Home/RCReview.cshtml">
-      <publishTime>09/29/2016 21:04:11</publishTime>
+      <publishTime>10/02/2016 01:33:51</publishTime>
     </File>
     <File Include="Views/Home/ReadData.cshtml">
-      <publishTime>09/29/2016 19:22:57</publishTime>
+      <publishTime>10/02/2016 01:29:00</publishTime>
     </File>
     <File Include="Views/Home/ReviewList.cshtml">
-      <publishTime>09/29/2016 22:01:40</publishTime>
+      <publishTime>10/02/2016 00:29:44</publishTime>
     </File>
     <File Include="Views/Home/Search.cshtml">
-      <publishTime>09/30/2016 00:50:56</publishTime>
+      <publishTime>10/02/2016 01:40:14</publishTime>
     </File>
     <File Include="Views/Home/UpdateData.cshtml">
-      <publishTime>09/29/2016 00:06:22</publishTime>
+      <publishTime>10/02/2016 01:30:58</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutPage.cshtml">
       <publishTime>09/29/2016 23:14:11</publishTime>
@@ -251,7 +251,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/28/2016 22:51:01</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>09/30/2016 07:36:15</publishTime>
+      <publishTime>10/02/2016 17:20:50</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -7,22 +7,27 @@
 
 <h3> <p class="centerAlign"> Administrator Tools </p> </h3>
 
-<h4> List of Restaurants </h4>
-<br />
-<p class="rightAlign"> @Html.ActionLink("Add New Restaurant", "CreateData") </p>
-    
+<h4> <p class="centerAlign"> List of Restaurants </p> </h4>
+
     <table cellspacing="0" cellpadding="5" rules="all" class="searchResults">
         <tr>
+            <th> @Html.ActionLink("Add", "CreateData") / Read / Update / Delete </th>
             <th> Name </th>
             <th> Address </th>
             <th> Phone Number </th>
-            <th> Read / Update / Delete </th>
         </tr>
 
     @foreach (var restaurant in Model.allRes)
     {
         <tr>
-            <td> @restaurant.Name </td>
+            <td>
+                @Html.ActionLink("Restaurant Details", "ReadData", new { id = restaurant.ID }) <br />
+                @Html.ActionLink("Update Restaurant Details", "UpdateData", new { id = restaurant.ID }) <br />
+                @Html.ActionLink("Delete Restaurant", "DeleteData", new { id = restaurant.ID }) <br />
+            </td>
+            <td> 
+                 @Html.ActionLink(@restaurant.Name, "RCReview", new { id = restaurant.ID }) 
+            </td>
             <td>
                 @restaurant.Address <br/>
                 @restaurant.City <br/>
@@ -30,33 +35,28 @@
                 @restaurant.Postcode <br/>    
             </td>
             <td> @restaurant.Phone_Number </td>
-            <td>
-                @Html.ActionLink("Restaurant Details", "ReadData", new { id = restaurant.ID }) <br/>
-                @Html.ActionLink("Update Restaurant Details", "UpdateData", new { id = restaurant.ID }) <br/>
-                @Html.ActionLink("Delete Restaurant", "DeleteData", new { id = restaurant.ID }) <br/>
-            </td>
         </tr>
     }
     </table>
-
-<h4> List of Reviews </h4>
+<br />
+<h4> <p class="centerAlign"> List of Reviews </p> </h4>
 <br />
 <table cellspacing="0" cellpadding="5" rules="all" class="searchResults">
     <tr>
+        <th> Create / Read / Update </th>
         <th> ID </th>
         <th> Review </th>
-        <th> Create / Read / Update </th>
     </tr>
 
     @foreach (var review in Model.allRate)
     {
         <tr>
-            <td> @review.Restaurant_ID </td>
-            <td> @review.Review </td>
             <td>
-                @Html.ActionLink("Review Restaurant", "RCReview", new { id = review.ID }) <br />
+                @Html.ActionLink("Review Restaurant", "RCReview", new { id = review.Restaurant_ID }) <br />
                 @Html.ActionLink("Delete Review", "DeleteReview", new { id = review.ID }) <br />
             </td>
+            <td> @review.Restaurant_ID </td>
+            <td> @review.Review </td>
         </tr>
     }
 </table>

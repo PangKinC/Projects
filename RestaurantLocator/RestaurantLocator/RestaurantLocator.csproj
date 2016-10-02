@@ -167,7 +167,7 @@
     <Content Include="Models\RestaurantDB.edmx.diagram">
       <DependentUpon>RestaurantDB.edmx</DependentUpon>
     </Content>
-    <None Include="Properties\PublishProfiles\ResDBDeploy.pubxml" />
+    <None Include="Properties\PublishProfiles\ResDB.pubxml" />
     <None Include="scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
