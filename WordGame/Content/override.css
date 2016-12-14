@@ -12,8 +12,8 @@ body {
 /* Set width on the form input elements since they're 100% wide by default */
 
 
-.centerAlign {
-    text-center; 
+centerAlign {
+    text-align: center;
 }
 
 .rightAlign {

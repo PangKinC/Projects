@@ -1,0 +1,28 @@
+﻿@model IEnumerable<RestaurantFinder.Models.RestaurantReview>
+
+@{
+    Layout = "";
+}
+
+<table cellspacing="0" cellpadding="5" rules="all" class="searchResults changeTable">
+    <tr>
+        <th>
+            Reviewer
+        </th>
+        <th>
+            All Reviews Listing
+        </th>
+    </tr>
+
+    @foreach (var review in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(r => review.Reviewer)
+            </td>
+            <td>
+                @Html.DisplayFor(r => review.Review)
+            </td>
+        </tr>
+    }
+</table>

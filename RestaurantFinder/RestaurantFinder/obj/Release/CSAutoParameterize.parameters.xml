@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="RestaurantsDB-Web.config Connection String" description="RestaurantsDB Connection String used in web.config by the application to access the database." defaultValue="Data Source=(LocalDb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\aspnet-RestaurantFinder-20161022012531.mdf;Integrated Security=True" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Suijin\\Documents\\GitHub\\Projects\\RestaurantFinder\\RestaurantFinder\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='RestaurantsDB']/@connectionString" />
+  </parameter>
+</parameters>

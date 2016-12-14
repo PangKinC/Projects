@@ -1,0 +1,94 @@
+﻿@model RestaurantFinder.Models.RestaurantView
+
+
+@{
+    ViewBag.Title = "AdminTools";
+}
+
+<h3> <p class="centerAlign"> Administrator Tools </p> </h3>
+
+<h4> <p class="centerAlign"> List of Restaurants </p> </h4>
+
+<p>
+    @using (Html.BeginForm())
+    {
+    <p>
+        Name: @Html.TextBox("search")
+        Cuisine: @Html.DropDownList("resCuisine", "All")
+        Area: @Html.DropDownList("resArea", "All")
+        <input type="submit" , value="Filter" />
+    </p>
+    }
+</p>
+
+    <table cellspacing="0" cellpadding="5" rules="all" class="searchResults">
+        <tr>
+            <th> Name </th>
+            <th> Address </th>
+            <th> Phone Number </th>
+            <th> @Html.ActionLink("Add", "CreateData") / Read / Update / Delete </th>
+        </tr>
+
+    @foreach (var restaurant in Model.allRes)
+    {
+        <tr>
+            <td> 
+                 @Html.ActionLink(@restaurant.Name, "RCReview", new { id = restaurant.ID }) 
+            </td>
+            <td>
+                @restaurant.Address <br/>
+                @restaurant.Area <br />
+                @restaurant.City <br/>
+                @restaurant.Country <br/>
+                @restaurant.Postcode <br/>    
+            </td>
+            <td> @restaurant.PhoneNumber </td>
+            <td>
+                @Html.ActionLink("Restaurant Details", "ReadData", new { id = restaurant.ID }) <br />
+                @Html.ActionLink("Update Restaurant Details", "UpdateData", new { id = restaurant.ID }) <br />
+                @*<a href="@Url.Action("UpdateData", new { id = restaurant.ID })">
+                    <i class="glyphicon glyphicon-pencil circle-icon" ></i>
+                    <span class="sr-only">Edit</span>
+                </a><br />*@
+                @Html.ActionLink("Delete Restaurant", "DeleteData", new { id = restaurant.ID }) <br />
+            </td>
+        </tr>
+    }
+    </table>
+
+<br />
+<h4> <p class="centerAlign"> List of Reviews </p> </h4>
+
+<p>
+    @using (Html.BeginForm())
+    {
+    <p>
+        Name: @Html.TextBox("search")
+        Restaurant: @Html.DropDownList("revName", "All")
+        <input type="submit" , value="Filter" />
+    </p>
+    }
+ </p>
+
+    <table cellspacing="0" cellpadding="5" rules="all" class="searchResults">
+        <tr>
+            <th> Restaurant Name </th>
+            <th> Reviewer </th>
+            <th> Review </th>
+            <th> Create + Read / Update </th>
+        </tr>
+
+        @foreach (var review in Model.allRev)
+        {
+            <tr>
+                <td> @review.Restaurants.Name </td>
+                <td> @review.Reviewer </td>
+                <td> @review.Review </td>
+                <td>
+                    @Html.ActionLink("Review Restaurant", "RCReview", new { id = review.RestaurantID }) <br />
+                    @Html.ActionLink("Delete Review", "DeleteReview", new { id = review.ID }) <br />
+                </td>
+            </tr>
+        }
+    </table>
+

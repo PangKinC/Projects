@@ -4,8 +4,11 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title> Word Guessing Game </title>
 
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link href="Content/bootstrap-theme.css" rel="stylesheet" />
+
+    <title> Word Guessing Game </title>
     <style type="text/css">
         #form1 {
             height: 291px;
@@ -127,7 +130,14 @@
  </script>
 </head>
 <body style="height: 423px">
-    <h2>Word Guessing Game</h2>
+    <div class="row">
+        <div class="col-md-4"> </div>
+        <div class="col-md-4"> 
+            <h2>Word Guessing Game</h2>
+        </div>
+        <div class="col-md-4"> </div>
+    </div>
+
     <form id="form1" runat="server">
     <asp:ScriptManager id="scriptManager" runat="server" />
     <div style="height: 606px">
@@ -209,6 +219,9 @@
 
     </div>
     </form>
+
+    <script src="Scripts/jquery-1.9.1.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
 </body>
 </html>
 

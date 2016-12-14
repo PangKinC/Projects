@@ -1,0 +1,38 @@
+﻿@model RestaurantFinder.Models.RestaurantView
+
+
+@{
+    ViewBag.Title = "RCReview";
+}
+
+
+<h3> <p class="centerAlign"> Write a review for @Model.res.Name </p> </h3>
+
+
+@using (Html.BeginForm())
+{
+    <hr />
+    <div class="form-horizontal">
+
+            @Html.HiddenFor(model => model.res.ID)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.rev.Review, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.rev.Review, new { cols="60", rows="8", @class="changeTable"})
+                    @Html.ValidationMessageFor(model => model.rev.Review, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn-default" />
+                </div>
+            </div>
+        </div>
+}
+
+@{ Html.RenderAction("ReviewList"); }
+
+<br />
+@Html.ActionLink("Back to Index", "Index")

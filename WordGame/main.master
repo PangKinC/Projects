@@ -11,6 +11,7 @@
     <link href="Content/bootstrap.css" rel="stylesheet" />
     
     <asp:ContentPlaceHolder id="head" runat="server">
+            <title> Word Guessing Game </title>
     </asp:ContentPlaceHolder>
 </head>
 <body>
