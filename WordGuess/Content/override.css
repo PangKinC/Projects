@@ -1,0 +1,44 @@
+body {
+    padding-top: 50px; 
+    padding-bottom: 20px;
+    background-image: url('/Resources/bg1.jpg')
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+
+
+centerAlign {
+    text-align: center;
+}
+
+.rightAlign {
+    text-align: right;
+}
+
+.changeTable {
+    width: 100% !important;
+    max-width: 500px !important;
+    table-layout: fixed !important;
+}
+
+h2 {
+    font-family: 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+input[type="button"]:disabled
+{
+    background:#dddddd;
+    color: #ccc;
+}
+
+input[type="submit"]:disabled
+{
+    background:#dddddd;
+    color: #ccc;
+}
