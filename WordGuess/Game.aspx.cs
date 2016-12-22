@@ -154,6 +154,7 @@ public partial class Game : System.Web.UI.Page
         hidden = "";
         lettersLbl.Text = "";
         wordLbl.Text = "";
+        hintLbl.Text = "";
 
         // We set the restart button to false as we don't want it to display until the end of the game.
         newBtn.Visible = false;
@@ -242,10 +243,12 @@ public partial class Game : System.Web.UI.Page
         // The letter char variable will be the first element in btn.Text, since its a single character it will always be 0.
         letter = btn.Text.ElementAt(0);
 
+        foreach (Button b in btnList) { if (b.Text.Equals(btn.Text)) { b.Enabled = false; } }
+
         // This if statement block checks the word in uppercase and see if it contains the above letter (char)
         if (word.Contains(letter))
         {
-
+            
             // Using a for loop, which carries on until it reaches the max length of the word, it checks
             // Whether the character in the word matches the letter guessed. 
             // If it does we assign to the hidden string the new letter.
@@ -326,11 +329,13 @@ public partial class Game : System.Web.UI.Page
         }
 
         // We use this foreach loop to make sure the same button cannot be pressed again.
-        foreach (Button b in btnList) { if (b.Text.Equals(btn.Text)) { b.Enabled = false; } }
+
 
         // Finally if the hidden word has all been revealed (made equal to word), this if block would run. 
         if (hidden == word)
         {
+            hintLbl.Text = "";
+            correctWord = true;
             // First we multiply the above score gotten by the multiplier (best to have less wrong guesses!)
             score *= multiplier;
 
@@ -377,7 +382,7 @@ public partial class Game : System.Web.UI.Page
             // Tiny if statement as a failsafe to make sure that the correctCount doesnt exceed the maxWords value.
             //if (correctCount > maxWords) { correctCount = maxWords; }
             // Here we set the boolean for correctWord to true to trigger the if statement in updateScreen.
-            correctWord = true;
+
 
             // This if statement is called if there is more then 1 item in the dictonary.
             if (splitFile.Count() > 1)
@@ -416,6 +421,7 @@ public partial class Game : System.Web.UI.Page
         // If correctWord was set to true from guessing the word correctly before, this if statement block runs.
         if (correctWord == true)
         {
+            hintLbl.Text = "";
             // Note that currentScore is made equal to score, if we set it to score for the label, it would never increment.
             // So by storing it inside currentScore, it would just add the new score onto the current.
             currentScore += score;
@@ -590,13 +596,13 @@ public partial class Game : System.Web.UI.Page
         splitFile = splitFile.OrderBy(x => new Random().Next()).ToDictionary(item => item.Key, item => item.Value);
 
         if (Global.EasyBool == true) {
-            while (splitFile.Count() > 5) { splitFile.Remove(splitFile.Keys.Last()); }
+            while (splitFile.Count() > 9) { splitFile.Remove(splitFile.Keys.Last()); }
         }
         else if (Global.NormBool == true) {
-            while (splitFile.Count() > 10) { splitFile.Remove(splitFile.Keys.Last()); }
+            while (splitFile.Count() > 14) { splitFile.Remove(splitFile.Keys.Last()); }
         }
         else if (Global.HardBool == true) {
-            while (splitFile.Count() > 15) { splitFile.Remove(splitFile.Keys.Last()); }
+            while (splitFile.Count() > 20) { splitFile.Remove(splitFile.Keys.Last()); }
         }
 
         timeMsgLbl.Visible = false;
@@ -631,7 +637,7 @@ public partial class Game : System.Web.UI.Page
             maxLives = Math.Floor((double)maxWords / 1.6);
         }
         else if (Global.HardBool == true) {
-            maxLives = Math.Floor((double)maxWords / 2.0);
+            maxLives = Math.Floor((double)maxWords / 3.0);
         }
 
         // Here we update these labels to the default values required.

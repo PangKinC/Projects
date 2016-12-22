@@ -250,10 +250,12 @@
         </div>
 
     </div>
+       
 
     </ContentTemplate>
+
     </asp:UpdatePanel>
-    <asp:Timer ID="timer" runat="server" Interval="1000" OnTick="timer_Tick"> </asp:Timer>   
+          <asp:Timer ID="timer" runat="server" Interval="1000" OnTick="timer_Tick"> </asp:Timer>  
 
 </asp:Content>
 
