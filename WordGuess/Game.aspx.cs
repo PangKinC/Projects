@@ -30,6 +30,8 @@ public partial class Game : System.Web.UI.Page
     private static int seconds { get; set; }
     private static Dictionary<string, string> splitFile = new Dictionary<string, string>();
     private static List<Button> btnList;
+    private static List<Button> usedBtn;
+    private static int pauseCount;
 
     private static CheckBox prevDiff = null;
     private static Button prevSub = null;
@@ -45,6 +47,9 @@ public partial class Game : System.Web.UI.Page
         // This if statement goes through as long as the page is not in a postback state.
         if (!IsPostBack)
         {
+
+            usedBtn = new List<Button>();
+
             if (Global.EasyBool == true) {
                 var prevMaster = PreviousPage.Master.FindControl("MainContent");
                 prevDiff = (CheckBox)prevMaster.FindControl("easyTick");
@@ -119,6 +124,7 @@ public partial class Game : System.Web.UI.Page
             wordChain = 0;
             correctCount = 0;
             wrongWord = 0;
+            pauseCount = 0;
 
             // Here we set the maxWords to max items found in the dictionary. 
             maxWords = splitFile.Count();
@@ -126,12 +132,15 @@ public partial class Game : System.Web.UI.Page
             // We also set the max amount of lives a player has to half the maxWords amount.
             if (Global.EasyBool == true) {
                 maxLives = Math.Ceiling((double)maxWords / 1.3);
+                pauseCount = 3;
             }
             else if (Global.NormBool == true)  {
                 maxLives = Math.Floor((double)maxWords / 1.6);
+                pauseCount = 4;
             }
             else if (Global.HardBool == true) {
                 maxLives = Math.Floor((double)maxWords / 3.0);
+                pauseCount = 5;
             }
 
             // Here we update these labels to some default values for when the project gets built
@@ -179,7 +188,7 @@ public partial class Game : System.Web.UI.Page
         wrongGuess = 0;
 
         if (Global.EasyBool == true) {
-            multiplier = 1.75; 
+            multiplier = 1.75;
         }
         else if (Global.NormBool == true) {
             multiplier = 2.00;
@@ -222,6 +231,20 @@ public partial class Game : System.Web.UI.Page
             wordLbl.Text += " ";
         }
 
+        nextBtn.Enabled = true;
+
+        if (pauseCount != 0)
+        {
+            playBtn.Enabled = false;
+            playBtn.Visible = false;
+
+            pauseBtn.Visible = true;
+            pauseBtn.Enabled = true;
+        }
+
+
+        usedBtn.Clear();
+
         // Finally we enable all the buttons in the game again as it's a new word at this point.
         foreach (Button b in btnList)
         {
@@ -243,7 +266,13 @@ public partial class Game : System.Web.UI.Page
         // The letter char variable will be the first element in btn.Text, since its a single character it will always be 0.
         letter = btn.Text.ElementAt(0);
 
-        foreach (Button b in btnList) { if (b.Text.Equals(btn.Text)) { b.Enabled = false; } }
+        foreach (Button b in btnList) {
+            if (b.Text.Equals(btn.Text)) {
+                b.Enabled = false;
+                usedBtn.Add(b);
+            }
+        }
+    
 
         // This if statement block checks the word in uppercase and see if it contains the above letter (char)
         if (word.Contains(letter))
@@ -477,6 +506,7 @@ public partial class Game : System.Web.UI.Page
     // The finishScreen is as it sounds, the final visual to be shown either when game ends or when the user quits.
     public void finishScreen()
     {
+        timer.Enabled = true;
         timeMsgLbl.Text = "Next Word In ";
         timeMsgLbl.Visible = true;
         seconds = 6;
@@ -513,8 +543,12 @@ public partial class Game : System.Web.UI.Page
         // We show on the word label the whole word which the user was currently attempting.
         wordLbl.Text = word;
 
+        nextBtn.Enabled = false;
+        pauseBtn.Enabled = false;
+
         // Here we disable every letter button in the game.
         foreach (Button b in btnList) { b.Enabled = false; }
+
 
         /*// The label for timer is updated to 0 incase it is any other value.
         timeLbl.Text = "0";
@@ -667,5 +701,51 @@ public partial class Game : System.Web.UI.Page
         Global.PrgBool = false;
         Global.VgmBool = false;
         Response.Redirect("Default.aspx");
+    }
+ 
+    protected void pauseBtn_Click(object sender, EventArgs e)
+    {
+        pauseBtn.Enabled = false;
+        pauseBtn.Visible = false;
+        playBtn.Visible = true;
+        playBtn.Enabled = true;
+
+        pauseCount--;
+
+        foreach (Button b in btnList)
+        {
+            b.Enabled = false;
+        }
+
+        timer.Enabled = false;
+        
+    }
+
+    protected void playBtn_Click(object sender, EventArgs e)
+    {
+        playBtn.Visible = false;
+        playBtn.Enabled = false;
+        pauseBtn.Visible = true;
+
+        if (pauseCount != 0)
+        {
+            pauseBtn.Enabled = true;
+        }
+    
+        foreach (Button b in btnList)
+        {
+            b.Enabled = true;
+        }
+
+        foreach (Button btn in btnList)
+        {
+            foreach (Button b in usedBtn)
+            {
+                if (b.Text == btn.Text) { btn.Enabled = false; }
+            }
+        }
+
+        timer.Enabled = true;
+
     }
 }

@@ -101,12 +101,14 @@
             case 77:
                 document.getElementById('<%=mBtn.ClientID%>').click();
                 break;
-            // [ && ]
+            // [, \, ]
             case 219:
-                document.getElementById('<%=newBtn.ClientID%>').click();
-                break; 
-            case 221:
+                document.getElementById('<%=pauseBtn.ClientID%>').click();
+                break;
+            case 220:
                 document.getElementById('<%=nextBtn.ClientID%>').click();
+            case 221:
+                document.getElementById('<%=playBtn.ClientID%>').click();
                 break;
         }
 
@@ -153,8 +155,8 @@
         <div class="row">
             <div class="col-md-3"> 
                 <div class="well">
-                <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> 
-                <div class="text-center">
+                <br /> <br /> <br /> <br /> <br /> <br /> 
+                <div class="text-center" style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-style: italic; font-size: medium">
                     <asp:Label ID="guessLbl" runat="server" Font-Bold="true" Text="Wrong Letter Count: " Font-Names="Lucida Sans Unicode" Font-Size="Large"> </asp:Label>
                     <asp:Label ID="guessNoLbl" runat="server" Font-Italic="true" Font-Size="Large"> </asp:Label>
                     <br /> <br />
@@ -163,8 +165,10 @@
                     <br /> <br />
                     <asp:Label ID="countLbl" runat="server" Font-Bold="true" Text="Correct Words: " Font-Names="Lucida Sans Unicode" Font-Size="Large"> </asp:Label>
                     <asp:Label ID="countNoLbl" runat="server" Font-Italic="true" Font-Size="Large"> </asp:Label>
+                    <br /> <br />
+                    Use your keyboard and the respective letter keys as a alternative to mouse clicks!
                 </div>
-                <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+                <br /> <br /> <br /> <br /> <br /> <br />
                 </div>
             </div>
 
@@ -209,20 +213,23 @@
                     <asp:Button ID="nBtn" runat="server" Text="N" OnClick="letterGuessed" Height="40px" Width="40px"/>
                     <asp:Button ID="mBtn" runat="server" Text="M" OnClick="letterGuessed" Height="40px" Width="40px"/>
                     <br /> <br /> <br />
-                    <asp:Button ID="nextBtn" runat="server" Text="Next" OnClick="nextBtn_Click" Height="40px" Width="100px" />
-                    &nbsp;&nbsp;
-                    <asp:Button ID="newBtn" runat="server" Text="Restart" OnClick="newBtn_Click" Height="40px" Width="100px" Visible="False" /> 
-                    &nbsp;&nbsp;                                      
+                    <asp:Button ID="playBtn" runat="server" Text="Unpause" OnClick="playBtn_Click" Height="40px" Width="100px" Visible="False" />
+                    <asp:Button ID="pauseBtn" runat="server" Text="Pause" OnClick="pauseBtn_Click" Height="40px"  Width="100px" />
+                    &nbsp; &nbsp;
+                    <asp:Button ID="nextBtn" runat="server" Text="Skip" OnClick="nextBtn_Click" Height="40px" Width="100px" />
+                    &nbsp; &nbsp;                    
                     <asp:Button ID="backBtn" runat="server" Text="Back" OnClick="backBtn_Click" Height="40px" Width="100px" />
-                    <br /> <br />
+                    &nbsp; &nbsp;
+                    <asp:Button ID="newBtn" runat="server" Text="Restart" OnClick="newBtn_Click" Height="40px" Width="100px" Visible="False" />  
+                    <br /> 
                 </div>
                 </div>
             </div>
 
             <div class="col-md-3"> 
                 <div class="well">
-                <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> 
-                <div class="text-center">
+                <br /> <br /> <br /> <br /> <br /> <br />
+                <div class="text-center" style="font-size: medium; font-style: italic; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">
                     <asp:Label ID="livesLbl" runat="server" Font-Bold="true" Text="Lives Remaining: " Font-Names="Lucida Sans Unicode" Font-Size="Large"> </asp:Label>
                     <asp:Label ID="livesNoLbl" runat="server" Font-Italic="true" Font-Size="Large"> </asp:Label>
                     <br /> <br />
@@ -231,8 +238,10 @@
                     <br /> <br />
                     <asp:Label ID="chainLbl" runat="server" Font-Bold="true" Text="Chain Multiplier: " Font-Names="Lucida Sans Unicode" Font-Size="Large"> </asp:Label>
                     <asp:Label ID="chainNoLbl" runat="server" Font-Italic="true" Font-Size="Large"> </asp:Label>
+                    <br /> <br />
+                    Pause - [ <br /> Unpause - ] <br /> Skip - \
                 </div>
-                <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+                <br /> <br /> <br /> <br /> <br /> <br /> 
                 </div>   
             </div> 
         </div> 

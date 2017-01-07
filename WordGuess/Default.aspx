@@ -29,7 +29,7 @@
                         <li> Correctly guessed word score. </li>
                         <li> Multipliers for scoring. </li>
                         <li> Amount of time decreased on wrong guess. </li>
-                        <li> Number of lives. </li>
+                        <li> Number of lives & pauses. </li>
                     </ul>
                     <br /> 
                 </div>                                              
@@ -78,12 +78,12 @@
             <div class="well"> <br /> 
                 <div class="text-center">
                     <strong> Hints & Tricks </strong>
-                    <br /> <br /> <br />
+                    <br /> <br /> 
                     Because there's a lot of text on the screen at once, 
                     here are some description on the things one shold keep an eye out for:
                     <ol> <br />
-                        <li> It's not stated, but <strong>keyboard input</strong> is implemented, 
-                            you can press the respective letter key to trigger the button event like normal.</li>
+                        <li> <strong>Keyboard input</strong> is implemented and recommended, 
+                            you can press the respective letter key to trigger the event instead of clicking the mouse.</li>
                         <li> For an extra dimension of challenge, 
                             getting a wrong letter guess will <strong>DECREASE</strong> the amount of time remaining.</li>
                         <li> The <strong>score</strong> per word you get varies, 
@@ -95,9 +95,9 @@
                         <li> Finally at the end of the game, you have a chance to get <strong>BONUS</strong> points added to your final score.
                             This all depends on how much words in the list was guessed correctly, 
                             with the bonus being higher the less incorrect words there was. </li>
+                        <li> You get a limited amount of <strong>pauses</strong> in a single game, depending on what difficulty was chosen. </li>
                     </ol>
                 </div>
-                <br /> <br />
             </div>
         </div>
     </div>
