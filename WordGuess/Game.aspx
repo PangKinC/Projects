@@ -106,7 +106,7 @@
                 document.getElementById('<%=pauseBtn.ClientID%>').click();
                 break;
             case 220:
-                document.getElementById('<%=nextBtn.ClientID%>').click();
+                document.getElementById('<%=skipBtn.ClientID%>').click();
             case 221:
                 document.getElementById('<%=playBtn.ClientID%>').click();
                 break;
@@ -216,7 +216,7 @@
                     <asp:Button ID="playBtn" runat="server" Text="Unpause" OnClick="playBtn_Click" Height="40px" Width="100px" Visible="False" />
                     <asp:Button ID="pauseBtn" runat="server" Text="Pause" OnClick="pauseBtn_Click" Height="40px"  Width="100px" />
                     &nbsp; &nbsp;
-                    <asp:Button ID="nextBtn" runat="server" Text="Skip" OnClick="nextBtn_Click" Height="40px" Width="100px" />
+                    <asp:Button ID="skipBtn" runat="server" Text="Skip" OnClick="skipBtn_Click" Height="40px" Width="100px" />
                     &nbsp; &nbsp;                    
                     <asp:Button ID="backBtn" runat="server" Text="Back" OnClick="backBtn_Click" Height="40px" Width="100px" />
                     &nbsp; &nbsp;

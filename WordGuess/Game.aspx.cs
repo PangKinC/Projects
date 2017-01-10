@@ -47,7 +47,6 @@ public partial class Game : System.Web.UI.Page
         // This if statement goes through as long as the page is not in a postback state.
         if (!IsPostBack)
         {
-
             usedBtn = new List<Button>();
 
             if (Global.EasyBool == true) {
@@ -107,16 +106,6 @@ public partial class Game : System.Web.UI.Page
             // Here we take the dictionary and order it randomly (shuffling) by using the random class and a lambda expression.
             splitFile = splitFile.OrderBy(x => new Random().Next()).ToDictionary(item => item.Key, item => item.Value);
 
-            if (Global.EasyBool == true) {
-                while (splitFile.Count() > 9) { splitFile.Remove(splitFile.Keys.Last()); }
-            }
-            else if (Global.NormBool == true) {
-                while (splitFile.Count() > 14) { splitFile.Remove(splitFile.Keys.Last()); }
-            }
-            else if (Global.HardBool == true) {
-                while (splitFile.Count() > 20) { splitFile.Remove(splitFile.Keys.Last()); }
-            }
-         
             // We set these values all to 0 as a way to reset the game and to clear previous data on the browser.
             currentScore = 0;
             score = 0;
@@ -125,20 +114,27 @@ public partial class Game : System.Web.UI.Page
             correctCount = 0;
             wrongWord = 0;
             pauseCount = 0;
-
-            // Here we set the maxWords to max items found in the dictionary. 
-            maxWords = splitFile.Count();
+            maxLives = 0;
 
             // We also set the max amount of lives a player has to half the maxWords amount.
             if (Global.EasyBool == true) {
+                while (splitFile.Count() > 9) { splitFile.Remove(splitFile.Keys.Last()); }
+                // Here we set the maxWords to max items found in the dictionary. 
+                maxWords = splitFile.Count();
                 maxLives = Math.Ceiling((double)maxWords / 1.3);
                 pauseCount = 3;
             }
-            else if (Global.NormBool == true)  {
+            else if (Global.NormBool == true) {
+                while (splitFile.Count() > 14) { splitFile.Remove(splitFile.Keys.Last()); }
+                // Here we set the maxWords to max items found in the dictionary. 
+                maxWords = splitFile.Count();
                 maxLives = Math.Floor((double)maxWords / 1.6);
                 pauseCount = 4;
             }
             else if (Global.HardBool == true) {
+                while (splitFile.Count() > 20) { splitFile.Remove(splitFile.Keys.Last()); }
+                // Here we set the maxWords to max items found in the dictionary. 
+                maxWords = splitFile.Count();
                 maxLives = Math.Floor((double)maxWords / 3.0);
                 pauseCount = 5;
             }
@@ -169,33 +165,25 @@ public partial class Game : System.Web.UI.Page
         newBtn.Visible = false;
 
         // Here we set the timer to 36 seconds for EACH new word generated (AKA when player guesses word correctly)
+        // The multiplier and wrong guesses is set to the default value for each new word.
         if (Global.EasyBool == true) {
             startTimer(56);
-        }
-        else if (Global.NormBool == true) {
-            startTimer(41);
-        }
-        else if (Global.HardBool == true) {
-            startTimer(26);
-        }
-        
-        seconds = (int)Session["timer"];
-
-        // We set the correctWord to false as it's a new word.
-        correctWord = false;
-
-        // The multiplier and wrong guesses is set to the default value for each new word.
-        wrongGuess = 0;
-
-        if (Global.EasyBool == true) {
             multiplier = 1.75;
         }
         else if (Global.NormBool == true) {
+            startTimer(41);
             multiplier = 2.00;
         }
         else if (Global.HardBool == true) {
+            startTimer(26);
             multiplier = 2.50;
         }
+        
+        seconds = (int)Session["timer"];
+        wrongGuess = 0;
+
+        // We set the correctWord to false as it's a new word.
+        correctWord = false;
 
         // A mini if statement is here to check whether current lives is 0, if it is we reset to the default starting lives.
         // This is called here because we reach here from clicking the restart button.
@@ -225,16 +213,14 @@ public partial class Game : System.Web.UI.Page
         hidden = new Regex("([a-zA-z0-9])").Replace(hidden, "_");
 
         // Using some minor string formating with substring we then place a space between each character.
-        for (int i = 0; i < hidden.Length; i++)
-        {
+        for (int i = 0; i < hidden.Length; i++) {
             wordLbl.Text += hidden.Substring(i, 1);
             wordLbl.Text += " ";
         }
 
-        nextBtn.Enabled = true;
+        skipBtn.Enabled = true;
 
-        if (pauseCount != 0)
-        {
+        if (pauseCount != 0) {
             playBtn.Enabled = false;
             playBtn.Visible = false;
 
@@ -242,14 +228,10 @@ public partial class Game : System.Web.UI.Page
             pauseBtn.Enabled = true;
         }
 
-
         usedBtn.Clear();
 
         // Finally we enable all the buttons in the game again as it's a new word at this point.
-        foreach (Button b in btnList)
-        {
-            b.Enabled = true;
-        }
+        foreach (Button b in btnList) { b.Enabled = true; }
     }
 
     // The letterGuessed is called on every button click in which all buttons have this same method assigned to onCommand.
@@ -266,6 +248,7 @@ public partial class Game : System.Web.UI.Page
         // The letter char variable will be the first element in btn.Text, since its a single character it will always be 0.
         letter = btn.Text.ElementAt(0);
 
+        // We use this foreach loop to make sure the same button cannot be pressed again.
         foreach (Button b in btnList) {
             if (b.Text.Equals(btn.Text)) {
                 b.Enabled = false;
@@ -273,16 +256,12 @@ public partial class Game : System.Web.UI.Page
             }
         }
     
-
         // This if statement block checks the word in uppercase and see if it contains the above letter (char)
-        if (word.Contains(letter))
-        {
-            
+        if (word.Contains(letter)) {      
             // Using a for loop, which carries on until it reaches the max length of the word, it checks
             // Whether the character in the word matches the letter guessed. 
             // If it does we assign to the hidden string the new letter.
-            for (int i = 0; i < word.Length; i++)
-            {
+            for (int i = 0; i < word.Length; i++) {
                 if (wordChar[i] == letter && wordChar[i] != '-') { hiddenChar[i] = letter; }
             }
 
@@ -291,7 +270,6 @@ public partial class Game : System.Web.UI.Page
 
             // Here we use a tiny if statement block to see how long it took the for the user to guess the word
             // And based on the amount of time took it gives a interactive score to reflect it.
-
             if (Global.EasyBool == true) {
                 if (seconds >= 51) { score = 300; }
                 else if (seconds >= 41) { score = 255; }
@@ -321,8 +299,7 @@ public partial class Game : System.Web.UI.Page
             updateScreen();
         }
         // The else statement is called if the word didn't contain the letter.
-        else
-        {
+        else {
             // It increments the letter label with each incorrect letter the user guessed.
             lettersLbl.Text += letter;
 
@@ -356,21 +333,15 @@ public partial class Game : System.Web.UI.Page
             // Finally again we called updateScreen() in order to update the relevant visuals.
             updateScreen();
         }
-
-        // We use this foreach loop to make sure the same button cannot be pressed again.
-
-
         // Finally if the hidden word has all been revealed (made equal to word), this if block would run. 
-        if (hidden == word)
-        {
+        if (hidden == word) {
             hintLbl.Text = "";
             correctWord = true;
             // First we multiply the above score gotten by the multiplier (best to have less wrong guesses!)
             score *= multiplier;
 
             // We check that the seconds is over 0, if so this if statement block will run.
-            if ((wrongGuess == 0) && (seconds != 0))
-            {
+            if ((wrongGuess == 0) && (seconds != 0)) {
                 // Here we increment wordChain by 1 each time.
                 wordChain = wordChain + 1;
 
@@ -408,14 +379,14 @@ public partial class Game : System.Web.UI.Page
             else { wordChain = 0; }
 
             // Here we increment correctCount by 1 each time, for each correct word guessed.
+
             // Tiny if statement as a failsafe to make sure that the correctCount doesnt exceed the maxWords value.
             //if (correctCount > maxWords) { correctCount = maxWords; }
+
             // Here we set the boolean for correctWord to true to trigger the if statement in updateScreen.
 
-
             // This if statement is called if there is more then 1 item in the dictonary.
-            if (splitFile.Count() > 1)
-            {
+            if (splitFile.Count() > 1) {
                 // We increment correctCount by 1 every time.
                 correctCount++;
                 // Because we got the word right and we want to go through to the next item in the dictionary
@@ -429,8 +400,7 @@ public partial class Game : System.Web.UI.Page
                 setup();
             }
             // Else statement is called when the its the last item remaining in dictionary.
-            else
-            {
+            else {
                 // We still increment correctCount as user did guess the word correctly.
                 correctCount++;
                 // In this case we update the visuals with updateScreen, and then call the finishScreen method.
@@ -438,7 +408,6 @@ public partial class Game : System.Web.UI.Page
                 finishScreen();
             }
         }
-
     }
 
     // The updateScreen() method is used to refresh all the relevant information shown on screen to the user.
@@ -448,15 +417,13 @@ public partial class Game : System.Web.UI.Page
         wordLbl.Text = "";
 
         // If correctWord was set to true from guessing the word correctly before, this if statement block runs.
-        if (correctWord == true)
-        {
+        if (correctWord == true) {
             hintLbl.Text = "";
             // Note that currentScore is made equal to score, if we set it to score for the label, it would never increment.
             // So by storing it inside currentScore, it would just add the new score onto the current.
             currentScore += score;
 
             // A tiny nested if statement block to check what current word chain and time is and updates the label accordingly.
-     
             if (Global.EasyBool == true) {
                 if (wordChain >= 4 && seconds >= 51) { chainNoLbl.Text = "x2"; }
                 else if (wordChain >= 3 && seconds >= 41) { chainNoLbl.Text = "x1.6"; }
@@ -496,8 +463,7 @@ public partial class Game : System.Web.UI.Page
         livesNoLbl.Text = maxLives.ToString();
 
         // Finally we use this for loop to keep the string format the same throughout the game.
-        for (int i = 0; i < hidden.Length; i++)
-        {
+        for (int i = 0; i < hidden.Length; i++) {
             wordLbl.Text += hidden.Substring(i, 1);
             wordLbl.Text += " ";
         }
@@ -510,12 +476,11 @@ public partial class Game : System.Web.UI.Page
         timeMsgLbl.Text = "Next Word In ";
         timeMsgLbl.Visible = true;
         seconds = 6;
+
         // Here we use another if statement block, to check how much words was correct out of the max available.
         // As seen the minimum 1.1x bonus is always there, but if the user gets over 63% of the word list 
         // guessed the final multiplier rises accordingly.
-
-        if ((maxLives == 0) || (splitFile.Count == 1))
-        {
+        if ((maxLives == 0) || (splitFile.Count == 1)) {
             timeMsgLbl.Text = "<span style='color: red;'> GAME OVER! </span>";
             timeLbl.Visible = false;
             timer.Enabled = false;
@@ -543,18 +508,11 @@ public partial class Game : System.Web.UI.Page
         // We show on the word label the whole word which the user was currently attempting.
         wordLbl.Text = word;
 
-        nextBtn.Enabled = false;
+        skipBtn.Enabled = false;
         pauseBtn.Enabled = false;
 
         // Here we disable every letter button in the game.
         foreach (Button b in btnList) { b.Enabled = false; }
-
-
-        /*// The label for timer is updated to 0 incase it is any other value.
-        timeLbl.Text = "0";
-
-        // Finally we set the timer to not enabled (visible).
-        timer.Enabled = false;*/
     }
 
     // The first of two mini methods, this takes a integer argument to decrease the timer of the game.
@@ -586,8 +544,7 @@ public partial class Game : System.Web.UI.Page
     protected void timer_Tick(object sender, EventArgs e)
     {
         // If seconds is over 0, the if statement block goes through, and decrements the seconds each second
-        if (seconds > 0)
-        {
+        if (seconds > 0) {
             seconds--;
             // We make sure that timer session is equavilent to the seconds in question
             Session["timer"] = seconds;
@@ -595,8 +552,7 @@ public partial class Game : System.Web.UI.Page
             timeLbl.Text = seconds.ToString();
         }
         // Else if seconds is not over (aka is 0) this block of instructions goes off.
-        else
-        {
+        else {
             timeMsgLbl.Visible = false;
             // Because time has ran out for the current hidden word, we decrement maxLives by 1.
             maxLives--;
@@ -606,8 +562,7 @@ public partial class Game : System.Web.UI.Page
 
             // Because we want to move onto the next random word, we also need to remove the current item from here.
             // Note that it uses if statement check that there are still elements in the dictionary.
-            if (splitFile.Count > 0)
-            {
+            if (splitFile.Count > 0) {
                 splitFile.Remove(splitFile.Keys.ElementAt(randomIndex));
                 splitFile.Remove(splitFile.Values.ElementAt(randomIndex));
             }
@@ -629,16 +584,6 @@ public partial class Game : System.Web.UI.Page
         // Then again we order and shuffle the list, so the items order are not the same as before.
         splitFile = splitFile.OrderBy(x => new Random().Next()).ToDictionary(item => item.Key, item => item.Value);
 
-        if (Global.EasyBool == true) {
-            while (splitFile.Count() > 9) { splitFile.Remove(splitFile.Keys.Last()); }
-        }
-        else if (Global.NormBool == true) {
-            while (splitFile.Count() > 14) { splitFile.Remove(splitFile.Keys.Last()); }
-        }
-        else if (Global.HardBool == true) {
-            while (splitFile.Count() > 20) { splitFile.Remove(splitFile.Keys.Last()); }
-        }
-
         timeMsgLbl.Visible = false;
         timeLbl.Visible = true;
         timer.Enabled = true;
@@ -651,26 +596,26 @@ public partial class Game : System.Web.UI.Page
         correctCount = 0;
         wrongWord = 0;
 
-        if (Global.EasyBool == true) {
-            startTimer(56);
-        }
-        else if (Global.NormBool == true) {
-            startTimer(41);
-        }
-        else if (Global.HardBool == true) {
-            startTimer(26);
-        }
-
-        // Here we set the maxWords to max items found in the dictionary. 
-        maxWords = splitFile.Count();
         // We also set the max amount of lives a player has to half the maxWords amount.
         if (Global.EasyBool == true) {
+            while (splitFile.Count() > 9) { splitFile.Remove(splitFile.Keys.Last()); }
+            // Here we set the maxWords to max items found in the dictionary. 
+            maxWords = splitFile.Count();
+            startTimer(56);
             maxLives = Math.Ceiling((double)maxWords / 1.3);
         }
         else if (Global.NormBool == true) {
+            while (splitFile.Count() > 14) { splitFile.Remove(splitFile.Keys.Last()); }
+            // Here we set the maxWords to max items found in the dictionary. 
+            maxWords = splitFile.Count();
+            startTimer(41);
             maxLives = Math.Floor((double)maxWords / 1.6);
         }
         else if (Global.HardBool == true) {
+            while (splitFile.Count() > 20) { splitFile.Remove(splitFile.Keys.Last()); }
+            // Here we set the maxWords to max items found in the dictionary. 
+            maxWords = splitFile.Count();
+            startTimer(26);
             maxLives = Math.Floor((double)maxWords / 3.0);
         }
 
@@ -687,7 +632,7 @@ public partial class Game : System.Web.UI.Page
     }
 
     // Clicking the Quit button at the any time will end the game and calls the finishScreen method.
-    protected void nextBtn_Click(object sender, EventArgs e)
+    protected void skipBtn_Click(object sender, EventArgs e)
     {
         finishScreen();
     }
@@ -711,14 +656,8 @@ public partial class Game : System.Web.UI.Page
         playBtn.Enabled = true;
 
         pauseCount--;
-
-        foreach (Button b in btnList)
-        {
-            b.Enabled = false;
-        }
-
-        timer.Enabled = false;
-        
+        foreach (Button b in btnList) { b.Enabled = false; }
+        timer.Enabled = false;       
     }
 
     protected void playBtn_Click(object sender, EventArgs e)
@@ -727,20 +666,11 @@ public partial class Game : System.Web.UI.Page
         playBtn.Enabled = false;
         pauseBtn.Visible = true;
 
-        if (pauseCount != 0)
-        {
-            pauseBtn.Enabled = true;
-        }
-    
-        foreach (Button b in btnList)
-        {
-            b.Enabled = true;
-        }
+        if (pauseCount != 0) { pauseBtn.Enabled = true; }
+        foreach (Button b in btnList) { b.Enabled = true; }
 
-        foreach (Button btn in btnList)
-        {
-            foreach (Button b in usedBtn)
-            {
+        foreach (Button btn in btnList) {
+            foreach (Button b in usedBtn) {
                 if (b.Text == btn.Text) { btn.Enabled = false; }
             }
         }
