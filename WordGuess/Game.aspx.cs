@@ -158,6 +158,10 @@ public partial class Game : System.Web.UI.Page
             currentNoLbl.Text = "1 / " + maxWords;
             pauseBtn.Text = String.Format("Pause ({0})", pauseCount);
             bonusNoLbl.Text = "(End Bonus: x0)";
+
+            // Finally we enable all the buttons in the game again as it's a new word at this point.
+            foreach (Button b in btnList) { b.Enabled = true; }
+
             // Then calls the setup method, which sets up a new hidden word and starts the timer for the game.
             setup();
         }
@@ -178,15 +182,15 @@ public partial class Game : System.Web.UI.Page
         // Here we set the timer to 36 seconds for EACH new word generated (AKA when player guesses word correctly)
         // The multiplier and wrong guesses is set to the default value for each new word.
         if (Global.EasyBool == true) {
-            startTimer(56);
+            startTimer(58);
             multiplier = 1.75;
         }
         else if (Global.NormBool == true) {
-            startTimer(41);
+            startTimer(43);
             multiplier = 2.00;
         }
         else if (Global.HardBool == true) {
-            startTimer(26);
+            startTimer(28);
             multiplier = 2.50;
         }
         
@@ -243,9 +247,6 @@ public partial class Game : System.Web.UI.Page
 
         usedBtn.Clear();
         updateScreen();
-
-        // Finally we enable all the buttons in the game again as it's a new word at this point.
-        foreach (Button b in btnList) { b.Enabled = true; }
     }
 
     // The letterGuessed is called on every button click in which all buttons have this same method assigned to onCommand.
@@ -349,6 +350,8 @@ public partial class Game : System.Web.UI.Page
         }
         // Finally if the hidden word has all been revealed (made equal to word), this if block would run. 
        if (hidden == word) {
+
+            foreach (Button b in btnList) { b.Enabled = false; }
 
             hintLbl.Text = "";
             correctWord = true;
@@ -542,9 +545,6 @@ public partial class Game : System.Web.UI.Page
 
         skipBtn.Enabled = false;
         pauseBtn.Enabled = false;
-
-        // Here we disable every letter button in the game.
-        foreach (Button b in btnList) { b.Enabled = false; }
     }
 
     // The first of two mini methods, this takes a integer argument to decrease the timer of the game.
@@ -584,19 +584,23 @@ public partial class Game : System.Web.UI.Page
             timeLbl.Text = seconds.ToString();
 
             if (Global.EasyBool == true) {
-                if (seconds == 53) { addScoreLbl.Visible = false; }
+                if (seconds == 56) {  foreach (Button b in btnList) { b.Enabled = true; } }
+                else if (seconds == 53) { addScoreLbl.Visible = false; }
             }
             else if (Global.NormBool == true) {
-                if (seconds == 38) { addScoreLbl.Visible = false; }
+                if (seconds == 41) { foreach (Button b in btnList) { b.Enabled = true; } }
+                else if (seconds == 38) { addScoreLbl.Visible = false; }
             }
             else if (Global.HardBool == true) {
-                if (seconds == 23) { addScoreLbl.Visible = false; }
+                if (seconds == 26) { foreach (Button b in btnList) { b.Enabled = true; } }
+                else if (seconds == 23) { addScoreLbl.Visible = false; }
             }
 
         }
         // Else if seconds is not over (aka is 0) this block of instructions goes off.
         else {
             timeMsgLbl.Visible = false;
+            score = 0;
             // Because time has ran out for the current hidden word, we decrement maxLives by 1.
 
             if (!skipClick) {
@@ -614,7 +618,12 @@ public partial class Game : System.Web.UI.Page
 
             // Tiny if else statement block to check whether lives is over 0, if it is we generate a new word.
             // Otherwise we end the game and call finishScreen.
-            if ((splitFile.Count() == 0) || (maxLives == 0)) { gameOver = true;  finishScreen(); }
+            if ((splitFile.Count() == 0) || (maxLives == 0)) {
+                gameOver = true;
+                // Here we disable every letter button in the game.
+                foreach (Button b in btnList) { b.Enabled = false; }
+                finishScreen();
+            }
             else { setup(); }
         }
     }
@@ -649,21 +658,21 @@ public partial class Game : System.Web.UI.Page
             while (splitFile.Count() > 9) { splitFile.Remove(splitFile.Keys.Last()); }
             // Here we set the maxWords to max items found in the dictionary. 
             maxWords = splitFile.Count();
-            startTimer(56);
+            startTimer(58);
             maxLives = Math.Ceiling((double)maxWords / 1.3);
         }
         else if (Global.NormBool == true) {
             while (splitFile.Count() > 14) { splitFile.Remove(splitFile.Keys.Last()); }
             // Here we set the maxWords to max items found in the dictionary. 
             maxWords = splitFile.Count();
-            startTimer(41);
+            startTimer(43);
             maxLives = Math.Floor((double)maxWords / 1.6);
         }
         else if (Global.HardBool == true) {
             while (splitFile.Count() > 20) { splitFile.Remove(splitFile.Keys.Last()); }
             // Here we set the maxWords to max items found in the dictionary. 
             maxWords = splitFile.Count();
-            startTimer(26);
+            startTimer(28);
             maxLives = Math.Floor((double)maxWords / 3.0);
         }
 
@@ -676,6 +685,9 @@ public partial class Game : System.Web.UI.Page
         wrongNoLbl.Text = String.Format("{0} / {1}", wrongWord, maxWords);
         pauseBtn.Text = String.Format("Pause ({0})", pauseCount);
         bonusNoLbl.Text = "(End Bonus: x0)";
+
+        foreach (Button b in btnList) { b.Enabled = true; }
+
         // Finally we restart the game by recalling setup().
         setup();
     }
@@ -699,6 +711,8 @@ public partial class Game : System.Web.UI.Page
             currentCount++;
         }
 
+        // Here we disable every letter button in the game.
+        foreach (Button b in btnList) { b.Enabled = false; }
         finishScreen();
     }
 
