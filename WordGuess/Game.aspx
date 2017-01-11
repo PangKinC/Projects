@@ -164,18 +164,22 @@
                     <asp:Label ID="wrongNoLbl" runat="server" Font-Italic="true" Font-Size="Large"> </asp:Label>
                     <br /> <br />
                     <asp:Label ID="countLbl" runat="server" Font-Bold="true" Text="Correct Words: " Font-Names="Lucida Sans Unicode" Font-Size="Large"> </asp:Label>
-                    <asp:Label ID="countNoLbl" runat="server" Font-Italic="true" Font-Size="Large"> </asp:Label>
+                    <asp:Label ID="countNoLbl" runat="server" Font-Italic="true" Font-Size="Large"> </asp:Label> <br />
+                    <asp:Label ID="bonusNoLbl" runat="server" Font-Italic="true" Font-Names="Lucida Sans Unicode" Font-Size="Small"> </asp:Label> <br />
                     <br /> <br />
                     Use your keyboard and the respective letter keys as a alternative to mouse clicks!
                 </div>
-                <br /> <br /> <br /> <br /> <br /> <br />
+                <br /> <br /> <br /> <br /> <br /> <br /> 
                 </div>
             </div>
 
             <div class="col-md-6"> 
                 <div class="well">
-                <br /> <br /> <br />
+                <br />
                 <div class="text-center">
+                    <asp:Label ID="currentLbl" runat="server" Font-Bold="true" Text="Current Word: " Font-Names="Lucida Sans Unicode" Font-Size="Large"> </asp:Label>
+                    <asp:Label ID="currentNoLbl" runat="server" Font-Italic="true" Font-Size="Large"> </asp:Label>
+                    <br /> <br /> <br/>
                     <asp:Label ID="wordLbl" runat="server" Font-Size="XX-Large"></asp:Label>  
                     <br /> <br /> <br />
                     <asp:Label ID="hintTextLbl" runat="server" Font-Bold="True" Text="Hint: " Font-Italic="True" Font-Names="Lucida Sans Unicode" Font-Size="Large"></asp:Label>
@@ -228,7 +232,7 @@
 
             <div class="col-md-3"> 
                 <div class="well">
-                <br /> <br /> <br /> <br /> <br /> <br />
+                <br /> <br /> <br /> <br /> <br /> <br /> 
                 <div class="text-center" style="font-size: medium; font-style: italic; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">
                     <asp:Label ID="livesLbl" runat="server" Font-Bold="true" Text="Lives Remaining: " Font-Names="Lucida Sans Unicode" Font-Size="Large"> </asp:Label>
                     <asp:Label ID="livesNoLbl" runat="server" Font-Italic="true" Font-Size="Large"> </asp:Label>
@@ -238,7 +242,7 @@
                     <br /> <br />
                     <asp:Label ID="chainLbl" runat="server" Font-Bold="true" Text="Chain Multiplier: " Font-Names="Lucida Sans Unicode" Font-Size="Large"> </asp:Label>
                     <asp:Label ID="chainNoLbl" runat="server" Font-Italic="true" Font-Size="Large"> </asp:Label>
-                    <br /> <br />
+                    <br /> <br /> <br /> <br />
                     Pause - [ <br /> Unpause - ] <br /> Skip - \
                 </div>
                 <br /> <br /> <br /> <br /> <br /> <br /> 
@@ -251,7 +255,11 @@
             <div class="col-md-6">
                 <div class="well">
                 <div class="text-center">
-                    <asp:Label ID="scoreLbl" runat="server" Font-Bold="True" Font-Names="Lucida Sans Unicode" Font-Size="X-Large"></asp:Label>
+                    <asp:Label ID="scoreLbl" runat="server" Font-Bold="True" Font-Names="Lucida Sans Unicode" Font-Size="X-Large"></asp:Label> 
+                    &nbsp;
+                    <asp:Label ID="addScoreLbl" runat="server" Font-Bold="True" Font-Names="Lucida Sans Unicode" Font-Size="X-Large" ForeColor="#996600"></asp:Label> 
+                    <br />
+                    <asp:Label ID="fScoreLbl" runat="server" Font-Bold="true" Font-Names="Lucida Sans Unicode" Font-Size="X-Large"> </asp:Label>
                 </div>
                 </div>
             </div>

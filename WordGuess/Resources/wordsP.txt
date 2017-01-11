@@ -3,7 +3,7 @@ Inheritance_Object Orientated Programming practice, where a subclass can inherit
 Integer_Data type that holds a whole number, can be positive, negative or zero.
 String_Data type which holds a series or sequence of characters.
 For Loop_A loop that takes a index and stops after a certain length has been reached.
-Abstraction_Object Orientated Programming practice, where the programmer hides unneccesary information from users.
+Abstraction_Object Orientated Programming practice, where the programmer hides unneccessary information from users.
 Array_Data structure which holds a series of objects of the same type.
 Interface_Object Orientated Programming practice, can implement multiple of these but must use all the methods from one.
 Boolean_A data type which holds only two values: truth or false.
